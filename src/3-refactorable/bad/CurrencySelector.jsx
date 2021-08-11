@@ -1,48 +1,31 @@
-import React, { Component } from 'react';
+import PropTypes from "prop-types";
 
-class CurrencySelector extends Component {
-  constructor(props) {
-    super();
-    this.props = props;
-    this.state = {
-      localCurrency: props.localCurrency.currency,
-    };
+export default function CurrencySelector({ localCurrency, setLocalCurrency }) {
+  function onSelectCurrency(event) {
+    const currency = event.target.value;
 
-    this.setGlobalCurrency = props.setGlobalCurrency;
+    setLocalCurrency(currency);
   }
 
-  onSelectCurrency(e) {
-    const currency = e.target.value;
-
-    this.setGlobalCurrency(currency);
-
-    this.setState({
-      localCurrency: currency,
-    });
-  }
-
-  render() {
-    return (
-      <div>
-        <label htmlFor="currencySelector">Currency:</label>
+  return (
+    <div>
+      <label>
+        Currency:
         <select
           className="u-full-width"
-          id="currencySelector"
-          onChange={this.onSelectCurrency.bind(this)}
-          value={this.state.localCurrency}
+          onChange={onSelectCurrency}
+          value={localCurrency}
         >
           <option value="usd">USD</option>
           <option value="rupee">Rupee</option>
           <option value="yuan">Yuan</option>
         </select>
-      </div>
-    );
-  }
+      </label>
+    </div>
+  );
 }
 
 CurrencySelector.propTypes = {
-  setGlobalCurrency: React.PropTypes.func.isRequired,
-  localCurrency: React.PropTypes.string.isRequired,
+  localCurrency: PropTypes.string.isRequired,
+  setLocalCurrency: PropTypes.func.isRequired,
 };
-
-export default CurrencySelector;

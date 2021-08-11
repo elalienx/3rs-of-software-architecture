@@ -14,9 +14,8 @@ export default function Cart(props) {
   return (
     <div>
       <h2>Cart</h2>
-      {cart.length === 0 ? (
-        <p>Nothing in the cart</p>
-      ) : (
+      {cart.length === 0 ?? <p>Nothing in the cart</p>}
+      {cart.length > 0 ?? (
         <table style={{ width: "100%" }}>
           <tbody>
             <tr>
@@ -25,11 +24,11 @@ export default function Cart(props) {
             </tr>
             {cart.map((item) => (
               <tr key={item.id}>
-                <td>{inventory[item.id].product}</td>
+                <td>{item.product}</td>
                 <td>
                   {currencyConverter.convert(
-                    inventory[item.id].price,
-                    inventory[item.id].currency,
+                    item.price,
+                    item.currency,
                     localCurrency
                   )}
                 </td>

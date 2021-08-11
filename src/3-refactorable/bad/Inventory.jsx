@@ -5,6 +5,7 @@ export default function Inventory(props) {
 
   // Mutating an external state, BAD!
   function onAddToCart(itemId) {
+    console.log("Invetory.jsx onAddToCart() itemId", itemId);
     window.cart.push(itemId);
   }
 
@@ -48,7 +49,7 @@ export default function Inventory(props) {
 }
 
 Inventory.propTypes = {
-  inventory: PropTypes.object.isRequired,
-  localCurrency: PropTypes.string.isRequired,
   currencyConverter: PropTypes.object.isRequired,
+  inventory: PropTypes.array.isRequired,
+  localCurrency: PropTypes.string.isRequired,
 };
