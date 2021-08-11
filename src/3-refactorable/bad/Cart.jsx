@@ -1,79 +1,49 @@
-import React, { Component } from 'react';
+import { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 
-class Cart extends Component {
-  constructor(props) {
-    super();
-    this.state = {
-      cart: window.cart,
-      localCurrency: props.localCurrency,
-      inventory: props.inventory,
-    };
+export default function Cart(props) {
+  const { currencyConverter, inventory, localCurrency } = props;
 
-    // Repeatedly sync global cart to local cart
-    this.watcher = window.setInterval(
-      () => {
-        this.setState({
-          cart: window.cart,
-        });
-      },
-      1000,
-    );
-    this.CurrencyConverter = props.currencyConverter;
-  }
+  const [cart, setCart] = useState([]);
 
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      localCurrency: nextProps.localCurrency,
-    });
-  }
+  // Repeatedly sync global cart to local cart, BAD!
+  useEffect(() => {
+    window.setInterval(() => setCart(window.cart), 1000);
+  }, [setCart]);
 
-  componentWillUnmount() {
-    window.clearInterval(this.watcher);
-  }
-
-  render() {
-    return (
-      <div>
-        <h2>Cart</h2>
-        {this.state.cart.length === 0
-          ? <p>Nothing in the cart</p>
-          : <table style={{ width: '100%' }}>
-              <tbody>
-                <tr>
-                  <th>
-                    Product
-                  </th>
-
-                  <th>
-                    Price
-                  </th>
-                </tr>
-                {this.state.cart.map((itemId, idx) => (
-                  <tr key={idx}>
-                    <td>
-                      {this.state.inventory[itemId].product}
-                    </td>
-
-                    <td>
-                      {this.CurrencyConverter.convert(
-                        this.state.inventory[itemId].price,
-                        this.state.inventory[itemId].currency,
-                        this.state.localCurrency,
-                      )}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>}
-      </div>
-    );
-  }
+  return (
+    <div>
+      <h2>Cart</h2>
+      {cart.length === 0 ? (
+        <p>Nothing in the cart</p>
+      ) : (
+        <table style={{ width: "100%" }}>
+          <tbody>
+            <tr>
+              <th>Product</th>
+              <th>Price</th>
+            </tr>
+            {cart.map((item) => (
+              <tr key={item.id}>
+                <td>{inventory[item.id].product}</td>
+                <td>
+                  {currencyConverter.convert(
+                    inventory[item.id].price,
+                    inventory[item.id].currency,
+                    localCurrency
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
+    </div>
+  );
 }
 
 Cart.propTypes = {
-  inventory: React.PropTypes.object.isRequired,
-  localCurrency: React.PropTypes.string.isRequired,
-  currencyConverter: React.PropTypes.object.isRequired,
+  currencyConverter: PropTypes.object.isRequired,
+  inventory: PropTypes.array.isRequired,
+  localCurrency: PropTypes.string.isRequired,
 };
-
-export default Cart;

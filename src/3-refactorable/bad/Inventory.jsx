@@ -1,80 +1,54 @@
-import React, { Component } from "react";
+import PropTypes from "prop-types";
 
-class Inventory extends Component {
-  constructor(props) {
-    super();
-    this.state = {
-      localCurrency: props.localCurrency,
-      inventory: props.inventory,
-    };
+export default function Inventory(props) {
+  const { currencyConverter, inventory, localCurrency } = props;
 
-    this.CurrencyConverter = props.currencyConverter;
-    this.cart = window.cart;
+  // Mutating an external state, BAD!
+  function onAddToCart(itemId) {
+    window.cart.push(itemId);
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      localCurrency: nextProps.localCurrency,
-    });
-  }
+  return (
+    <div>
+      <table style={{ width: "100%" }}>
+        <tbody>
+          <tr>
+            <th>Product</th>
+            <th>Image</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Cart</th>
+          </tr>
 
-  onAddToCart(itemId) {
-    this.cart.push(itemId);
-  }
-
-  render() {
-    return (
-      <div>
-        <table style={{ width: "100%" }}>
-          <tbody>
-            <tr>
-              <th>Product</th>
-
-              <th>Image</th>
-
-              <th>Description</th>
-
-              <th>Price</th>
-
-              <th>Cart</th>
+          {inventory.map((item) => (
+            <tr key={item.id}>
+              <td>{item.product}</td>
+              <td>
+                <img src={item.image} alt="" />
+              </td>
+              <td>{item.description}</td>
+              <td>
+                {currencyConverter.convert(
+                  item.price,
+                  item.currency,
+                  localCurrency
+                )}
+              </td>
+              <td>
+                <button onClick={() => onAddToCart(item.id)}>
+                  Add to Cart
+                </button>
+              </td>
             </tr>
-
-            {Object.keys(this.state.inventory).map((itemId) => (
-              <tr key={itemId}>
-                <td>{this.state.inventory[itemId].product}</td>
-
-                <td>
-                  <img src={this.state.inventory[itemId].img} alt="" />
-                </td>
-
-                <td>{this.state.inventory[itemId].desc}</td>
-
-                <td>
-                  {this.CurrencyConverter.convert(
-                    this.state.inventory[itemId].price,
-                    this.state.inventory[itemId].currency,
-                    this.state.localCurrency
-                  )}
-                </td>
-
-                <td>
-                  <button onClick={() => this.onAddToCart(itemId)}>
-                    Add to Cart
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    );
-  }
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
 }
 
 Inventory.propTypes = {
-  inventory: React.PropTypes.object.isRequired,
-  localCurrency: React.PropTypes.string.isRequired,
-  currencyConverter: React.PropTypes.object.isRequired,
+  inventory: PropTypes.object.isRequired,
+  localCurrency: PropTypes.string.isRequired,
+  currencyConverter: PropTypes.object.isRequired,
 };
-
-export default Inventory;
