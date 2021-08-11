@@ -43,91 +43,22 @@ These aren't the only things to consider, but they are immediate red flags. Fort
 - There is no set limit of lines for a function, as this depends on what particular language you are coding in. The main point is that your function should do ONE thing, and ONE thing only. If your function, which calculates the price of an item after taxes, first has to connect to the database, look up the item, get the tax data, and then do the calculation, then it's clearly doing more than one thing. Long functions typically indicate too much is happening.
 - More than two levels of nesting can imply poor performance (in a loop), and it can be especially hard to read in long conditionals. Consider extracting nested logic into separate functions.
 
-Let's take a look at this first piece of our shopping cart application, to see what bad readability looks like.
+Let's take a look at this first piece of our shopping cart application, to see what bad readability looks like. 
 [Click here to open the code in a new tab.](./src/1-readable/bad/App.jsx)
 
 There are a number of problems we can see right away:
 
-- Inconsistent and unpleasant formatting
-- Poorly named variables
-- Disorganized data structures (inventory not keyed by IDs)
-- Comments that are either unnecessary or serve the job of what a good variable name would
+- Inconsistent and unpleasant formatting.
+- Poorly named variables.
+- Comments that are either unnecessary or serve the job of what a good variable name would.
 
 Let's take a look at how we could improve it:
-
-```javascript
-// src/1-readable/good/index.js
-import React, { Component } from "react";
-
-export default class Inventory extends Component {
-  constructor() {
-    super();
-    this.state = {
-      localCurrency: "usd",
-      inventory: {
-        1: {
-          product: "Flashlight",
-          img: "/flashlight.jpg",
-          desc: "A really great flashlight",
-          price: 100,
-          currency: "usd",
-        },
-        2: {
-          product: "Tin can",
-          img: "/tin_can.jpg",
-          desc: "Pretty much what you would expect from a tin can",
-          price: 32,
-          currency: "usd",
-        },
-        3: {
-          product: "Cardboard Box",
-          img: "/cardboard_box.png",
-          desc: "It holds things",
-          price: 5,
-          currency: "usd",
-        },
-      },
-    };
-  }
-
-  render() {
-    return (
-      <table style={{ width: "100%" }}>
-        <tbody>
-          <tr>
-            <th>Product</th>
-
-            <th>Image</th>
-
-            <th>Description</th>
-
-            <th>Price</th>
-          </tr>
-          {Object.keys(this.state.inventory).map((itemId) => (
-            <tr key={itemId}>
-              <td>{this.state.inventory[itemId].product}</td>
-
-              <td>
-                <img src={this.state.inventory[itemId].img} alt="" />
-              </td>
-
-              <td>{this.state.inventory[itemId].desc}</td>
-
-              <td>{this.state.inventory[itemId].price}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    );
-  }
-}
-```
+[Click here to open the code in a new tab.](src/1-readable/good/App.jsx)
 
 This improved code now exhibits the following features:
 
-- It is consistently formatted using the automatic formatter Prettier
-- Names are much more descriptive
-- Data structures are properly organized. In this case the Inventory is keyed by ID. Bad readability can mean bad performance. If we had wanted to get an item from our inventory in our bad code example we would have had an O(n) lookup time but with Inventory keyed by ID we get an O(1) lookup, which is MUCH faster with large inventories.
+- It is consistently formatted using the automatic formatter Prettier.
+- Names are much more descriptive.
 - Comments are no longer needed because good naming serves to clarify the meaning of the code. Comments are needed when business logic is complex and when documentation is required.
 
 ## 2. Reusability
