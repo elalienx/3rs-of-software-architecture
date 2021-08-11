@@ -93,7 +93,7 @@ Let's see what this looks like with more reusable components:
 - `CurrencySelector.jsx` ([right click to open](src/2-reusable/good/CurrencySelector.jsx))
 - `Inventory.jsx` ([right click to open](src/2-reusable/good/Inventory.jsx))
 
-This code has improved a great deal. Now we have individual modules for _currency selection_ and _conversion_. Moreover, we can now provide the _inventory data_ to our Inventory component. That means that we could download the inventory data, for example, and provide it to the Inventory component without ever having to modify its source code. This decoupling is the Dependency Inversion Principle, and it's a powerful way of creating reusable code.
+This code has improved a great deal. Now we have individual modules for `currency selection` and `conversion`. Moreover, we can now provide the `inventory data` to our Inventory component. That means that we could download the inventory data, for example, and provide it to the Inventory component without ever having to modify its source code. This decoupling is the [Dependency Inversion Principle](https://en.wikipedia.org/wiki/Dependency_inversion_principle), and it's a powerful way of creating reusable code.
 
 Now, it's time for a bit of caution. Before diving in and making everything reusable, it's important to realize that reusability requires that you have a good API for others to consume. If you don't, then whoever uses your API could be hurt when you go to update it because you realize it wasn't thought out well enough. So, when should code NOT be reusable?
 
