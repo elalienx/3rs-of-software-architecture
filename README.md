@@ -167,112 +167,18 @@ The two main issues with the code above are:
 
 Even though our modules are reusable and readable, by writing to global variables we are making our overall system very brittle. Any third-party library that we bring in could overwrite our `window.cart` with something else and break our app. Furthermore, any module we write can access it and modify it without any safeguards or centralized way of updating.
 
-You might be saying, "Yeah, yeah I would never structure my app like this in the first place." That's great! Remember though, that even though this is exaggerated, the point is that the way the cart is updated and read is not centralized. If instead of using global variables and `setInterval` you were using a message passing module, that could also make your code hard to understand and refactor at scale because it could be hard to isolate state and figure out how one module might affect another.
+You might be saying, "Yeah, yeah I would never structure my app like this in the first place." That's great! Remember though, that even though this is exaggerated, the point is that the way the cart is updated and read is not centralized. If instead of using global variables and `setInterval` you were using a [message passing](https://en.wikipedia.org/wiki/Message_passing) module, that could also make your code hard to understand and refactor at scale because it could be hard to isolate state and figure out how one module might affect another.
 
-We will centralize our state management using Redux. If you haven't used Redux before, [check out the tutorial](http://redux.js.org/docs/basics/).
+We will centralize our state management using Context API. If you haven't used Conext API before, [check out the official documentation](https://reactjs.org/docs/context.html).
 
 Let's see what this more refactorable code looks like:
 
-```javascript
-// src/3-refactorable/good/containers/inventory.js
-import React from "react";
-import { connect } from "react-redux";
-import { addToCartAction } from "../actions";
+**Project structure:**
 
-import CurrencyConverter from "../lib/currency-converter";
-import Inventory from "../components/inventory";
-
-const InventoryContainer = ({
-  inventory,
-  currencies,
-  localCurrency,
-  addToCart,
-}) => (
-  <Inventory
-    currencyConverter={new CurrencyConverter(currencies)}
-    inventory={inventory}
-    localCurrency={localCurrency}
-    addToCart={(productId) => addToCart(productId)}
-  />
-);
-
-InventoryContainer.propTypes = {
-  currencies: React.PropTypes.object.isRequired,
-  inventory: React.PropTypes.object.isRequired,
-  localCurrency: React.PropTypes.string.isRequired,
-  addToCart: React.PropTypes.func.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  inventory: state.inventory,
-  currencies: state.currencies,
-  localCurrency: state.localCurrency,
-});
-
-export default connect(mapStateToProps, {
-  addToCart: addToCartAction,
-})(InventoryContainer);
-```
-
-```javascript
-// src/3-refactorable/good/containers/cart.js
-import React from "react";
-import { connect } from "react-redux";
-
-import CurrencyConverter from "../lib/currency-converter";
-import Cart from "../components/cart";
-
-const CartContainer = ({ cart, inventory, currencies, localCurrency }) => (
-  <Cart
-    cart={cart}
-    currencyConverter={new CurrencyConverter(currencies)}
-    localCurrency={localCurrency}
-    inventory={inventory}
-  />
-);
-
-CartContainer.propTypes = {
-  currencies: React.PropTypes.object.isRequired,
-  cart: React.PropTypes.array.isRequired,
-  inventory: React.PropTypes.object.isRequired,
-  localCurrency: React.PropTypes.string.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  cart: state.cart,
-  inventory: state.inventory,
-  currencies: state.currencies,
-  localCurrency: state.localCurrency,
-});
-
-export default connect(mapStateToProps, {})(CartContainer);
-```
-
-```javascript
-// src/3-refactorable/good/actions/index.js
-import * as types from "../constants/action-types";
-
-export const addToCartAction = (productId) => ({
-  type: types.ADD_TO_CART,
-  productId,
-});
-```
-
-```javascript
-// src/3-refactorable/good/reducers/cart.js
-import { ADD_TO_CART } from "../constants/action-types";
-
-const initialState = [];
-
-export default (state = initialState, action) => {
-  switch (action.type) {
-    case ADD_TO_CART:
-      return [...state, parseInt(action.productId, 10)];
-    default:
-      return state;
-  }
-};
-```
+- `src/3-refactorable/good/containers/inventory.js`
+- `src/3-refactorable/good/containers/cart.js`
+- `src/3-refactorable/good/actions/index.js`
+- `src/3-refactorable/good/reducers/cart.js`
 
 This improved code centralizes our side effects to an `action` function which takes a `productId` in and passes it to our `reducer` which creates an entirely brand-new cart with this product added to it. This new cart is placed in our `store`, and once that happens all of our components which derive their state from particular pieces of the `store` will be notified by `react-redux` of the new data, and they will update their state. React will intelligently re-render each updated component, and that's it!
 
@@ -280,113 +186,14 @@ This flow makes it possible to be sure that the state of your application can on
 
 One caveat to note: you might not need Redux in this project's example application, but if we were to expand this code it would become easier to use Redux as the state management solution instead of putting everything in the top-level controller `index.js`. We could have isolated the state of our app there and passed the appropriate data-modifying action functions down through each module. The issue with that is that at scale, we would have a lot of actions to pass down and a lot of data that would live in one massive `index.js` controller. By committing to a proper centralization of state early, we won't need to change much as our application develops.
 
+#### 3 Test
+
 The last thing we need to look at is tests. Tests give us confidence that we can change a module and it will still do what it was intended to do. We will look at the tests for the Cart and Inventory components:
 
-```javascript
-// src/test/cart.test.js
-import React from "react";
-import { shallow } from "enzyme";
-import Cart from "../src/3-refactorable/good/components/cart";
+**Testing files:**
 
-const props = {
-  localCurrency: "usd",
-  cart: [1, 1],
-  inventory: {
-    1: {
-      product: "Flashlight",
-      img: "/flashlight.jpg",
-      desc: "A really great flashlight",
-      price: 100,
-      currency: "usd",
-    },
-  },
-  currencyConverter: {
-    convert: jest.fn(),
-  },
-};
-
-it("should render Cart without crashing", () => {
-  const cartComponent = shallow(<Cart {...props} />);
-  expect(cartComponent);
-});
-
-it("should show all cart data in cart table", () => {
-  props.currencyConverter.convert = function () {
-    return `$${props.inventory[1].price}`;
-  };
-
-  const cartComponent = shallow(<Cart {...props} />);
-  let tr = cartComponent.find("tr");
-  expect(tr.length).toEqual(3);
-
-  props.cart.forEach((item, idx) => {
-    let td = cartComponent.find("td");
-    let product = td.at(2 * idx);
-    let price = td.at(2 * idx + 1);
-
-    expect(product.text()).toEqual(props.inventory[item].product);
-    expect(price.text()).toEqual(props.currencyConverter.convert());
-  });
-});
-```
-
-```javascript
-// src/test/inventory.test.js
-import React from "react";
-import { shallow } from "enzyme";
-import Inventory from "../src/3-refactorable/good/components/inventory";
-
-const props = {
-  localCurrency: "usd",
-  inventory: {
-    1: {
-      product: "Flashlight",
-      img: "/flashlight.jpg",
-      desc: "A really great flashlight",
-      price: 100,
-      currency: "usd",
-    },
-  },
-  addToCart: jest.fn(),
-  changeCurrency: jest.fn(),
-  currencyConverter: {
-    convert: jest.fn(),
-  },
-};
-
-it("should render Inventory without crashing", () => {
-  const inventoryComponent = shallow(<Inventory {...props} />);
-  expect(inventoryComponent);
-});
-
-it("should show all inventory data in table", () => {
-  props.currencyConverter.convert = function () {
-    return `$${props.inventory[1].price}`;
-  };
-
-  const inventoryComponent = shallow(<Inventory {...props} />);
-  let tr = inventoryComponent.find("tr");
-  expect(tr.length).toEqual(2);
-
-  let td = inventoryComponent.find("td");
-  let product = td.at(0);
-  let image = td.at(1);
-  let desc = td.at(2);
-  let price = td.at(3);
-
-  expect(product.text()).toEqual("Flashlight");
-  expect(image.html()).toEqual('<td><img src="/flashlight.jpg" alt=""/></td>');
-  expect(desc.text()).toEqual("A really great flashlight");
-  expect(price.text()).toEqual("$100");
-});
-
-it("should have Add to Cart button work", () => {
-  const inventoryComponent = shallow(<Inventory {...props} />);
-  let addToCartBtn = inventoryComponent.find("button").first();
-  addToCartBtn.simulate("click");
-  expect(props.addToCart).toBeCalled();
-});
-```
+- `src/test/cart.test.js`
+- `src/test/inventory.test.js`
 
 These tests ensure that the Cart and Inventory components:
 
@@ -405,29 +212,11 @@ Software architecture is the stuff that's hard to change, so invest early in a r
 Thank you for reading this! If you wish to expand on this project or contribute, run the following commands to install everything you need:
 
 ```
-npm install -g create-react-app
 npm install
 npm run start
 ```
 
 Open a browser and see the app running at `http://localhost:3000/`
-
-## Contributing
-
-Thank you for your contributions!
-
-Before opening a friendly Pull Request, make sure you run the following and resolve any errors noted by the linter:
-
-```
-npm run fmt
-npm run lint
-```
-
-Finally, change any relevant code examples in this `README.md` to reflect your changes.
-
-## Translation
-
-- ![tr](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Turkey.png) **Turkish**: [bsonmez/3rs-of-software-architecture](https://github.com/bsonmez/3rs-of-software-architecture)
 
 ## License
 
