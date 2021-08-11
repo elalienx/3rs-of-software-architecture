@@ -62,6 +62,8 @@ This improved code now exhibits the following features:
 - Names are much more descriptive.
 - Comments are no longer needed because good naming serves to clarify the meaning of the code. Comments are needed when business logic is complex and when documentation is required.
 
+---
+
 ## 2. Reusability
 
 Reusability is the sole reason you are able to read this code, communicate with strangers online, and even program at all. Reusability allows us to express new ideas with little pieces of the past.
@@ -100,19 +102,26 @@ Now, it's time for a bit of caution. Before diving in and making everything reus
 - If you can't define a good API yet, don't make a separate module. Duplication is better than a bad foundation.
 - You don't expect to reuse your function or module in the near future.
 
+---
+
 ## 3. Refactorability
+
+### About
 
 Code that is refactorable is code that you can change without fear. It's code that you can deploy on a Friday night, and come back to on Monday morning without any concern that your users encountered runtime errors.
 
 Refactorability is about the system as a whole. It's about how your reusable modules connect together like LEGO pieces. If you change your Employee module and somehow it breaks your Reporting module, then you know you have some refactorability issues. Refactorability is the highest piece of the 3 R hierarchy, and it's the hardest to achieve and maintain. There will always be issues with any human system, and code is no different. However, there are things that we can do to make our code refactorable. So, what are they?
 
-- Isolated side effects
-- Tests
-- Static types
+1. Static types
+1. Isolated side effects
+1. Tests
+
+#### Static types
 
 We are using JavaScript, and not a typed alternative such as TypeScript, so we won't be able to see how static types can help. Suffice it to say, when your code has types, such as you see below, you know that nobody can pass incorrect values to your code, which limits the number of possible errors your app can experience:
 
 ```javascript
+// TypeScript
 // We can't get passed arrays, strings, objects, or any type other than a number
 function add(a: number, b: number) {
   return a + b;
@@ -123,177 +132,29 @@ I highly recommend using a statically typed alternative to JavaScript for large 
 
 You might be wondering, what does it mean to isolate your side effects? And you might be asking what are side effects even?
 
+### Isolated side effects
+
 A _side effect_ is when your function or module modifies data outside the scope of itself. If you are writing data to a disk, changing a global variable, or even printing something to the terminal, you have a side effect. Now, if your program has no side effects at all then it's a black box. Programs are instructions that a computer executes which take data in and produce data out. If there's no data going out, then a program isn't useful. But, for a program to produce data it has to modify something in the world outside itself. For this reason we need side effects, but we also need to isolate them.
 
-Why should we isolate side effects?
+**Why should we isolate side effects?**
 
 - Side effects make our code hard to test, because if a function's execution modifies some data that another function depends on then we can't be sure that a function will always give the same output with the same given input.
 - Side effects introduce coupling between otherwise reusable modules. If module A modifies some global state that module B depends on, then A has to be run before B.
 - Side effects make our system unpredictable. If any function or module can manipulate the state of the application, then we can't be sure how us updating one module will affect the whole system.
 
-How do we isolate side effects? The answer is by making one central place to update global state of our application. There are many great ways to do this for a client-side JavaScript application, but for this project we will use Redux.
+How do we isolate side effects? The answer is by making one central place to update global state of our application. There are many great ways to do this for a client-side JavaScript application, but for this project we will use Context API.
+
+## In practice
 
 We will modify our existing code to incorporate a shopping cart. Let's take a look at this new code and see why it's NOT refactorable:
 
-```javascript
-// src/3-refactorable/bad/inventory.js
-import React, { Component } from "react";
+**Project structure:**
 
-class Inventory extends Component {
-  constructor(props) {
-    super();
-    this.state = {
-      localCurrency: props.localCurrency,
-      inventory: props.inventory,
-    };
-
-    this.CurrencyConverter = props.currencyConverter;
-    this.cart = window.cart;
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      localCurrency: nextProps.localCurrency,
-    });
-  }
-
-  onAddToCart(itemId) {
-    this.cart.push(itemId);
-  }
-
-  render() {
-    return (
-      <div>
-        <table style={{ width: "100%" }}>
-          <tbody>
-            <tr>
-              <th>Product</th>
-
-              <th>Image</th>
-
-              <th>Description</th>
-
-              <th>Price</th>
-
-              <th>Cart</th>
-            </tr>
-
-            {Object.keys(this.state.inventory).map((itemId) => (
-              <tr key={itemId}>
-                <td>{this.state.inventory[itemId].product}</td>
-
-                <td>
-                  <img src={this.state.inventory[itemId].img} alt="" />
-                </td>
-
-                <td>{this.state.inventory[itemId].desc}</td>
-
-                <td>
-                  {this.CurrencyConverter.convert(
-                    this.state.inventory[itemId].price,
-                    this.state.inventory[itemId].currency,
-                    this.state.localCurrency
-                  )}
-                </td>
-
-                <td>
-                  <button onClick={() => this.onAddToCart(itemId)}>
-                    Add to Cart
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    );
-  }
-}
-
-Inventory.propTypes = {
-  inventory: React.PropTypes.object.isRequired,
-  localCurrency: React.PropTypes.string.isRequired,
-  currencyConverter: React.PropTypes.object.isRequired,
-};
-
-export default Inventory;
-```
-
-```javascript
-// src/3-refactorable/bad/cart.js
-import React, { Component } from "react";
-
-class Cart extends Component {
-  constructor(props) {
-    super();
-    this.state = {
-      cart: window.cart,
-      localCurrency: props.localCurrency,
-      inventory: props.inventory,
-    };
-
-    // Repeatedly sync global cart to local cart
-    this.watcher = window.setInterval(() => {
-      this.setState({
-        cart: window.cart,
-      });
-    }, 1000);
-    this.CurrencyConverter = props.currencyConverter;
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      localCurrency: nextProps.localCurrency,
-    });
-  }
-
-  componentWillUnmount() {
-    window.clearInterval(this.watcher);
-  }
-
-  render() {
-    return (
-      <div>
-        <h2>Cart</h2>
-        {this.state.cart.length === 0 ? (
-          <p>Nothing in the cart</p>
-        ) : (
-          <table style={{ width: "100%" }}>
-            <tbody>
-              <tr>
-                <th>Product</th>
-
-                <th>Price</th>
-              </tr>
-              {this.state.cart.map((itemId, idx) => (
-                <tr key={idx}>
-                  <td>{this.state.inventory[itemId].product}</td>
-
-                  <td>
-                    {this.CurrencyConverter.convert(
-                      this.state.inventory[itemId].price,
-                      this.state.inventory[itemId].currency,
-                      this.state.localCurrency
-                    )}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        )}
-      </div>
-    );
-  }
-}
-
-Cart.propTypes = {
-  inventory: React.PropTypes.object.isRequired,
-  localCurrency: React.PropTypes.string.isRequired,
-  currencyConverter: React.PropTypes.object.isRequired,
-};
-
-export default Cart;
-```
+- `currency-converter.js`
+- `App.jsx`
+- `CurrencySelector.jsx`
+- `Cart.jsx` (new) ([right click to open](src/3-refactorable/bad/Cart.jsx))
+- `Inventory.jsx` (modified) ([right click to open](src/3-refactorable/bad/Inventory.jsx))
 
 Here we have a new shopping cart module that shows the inventory items currently in the shopping cart. There are two very problematic things in this code, what are they?
 
