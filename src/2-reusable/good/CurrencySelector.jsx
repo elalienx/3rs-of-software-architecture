@@ -1,4 +1,4 @@
-import React from "react";
+import PropTypes from "prop-types";
 
 export default function CurrencySelector({ localCurrency, setLocalCurrency }) {
   function onSelectCurrency(event) {
@@ -25,7 +25,7 @@ export default function CurrencySelector({ localCurrency, setLocalCurrency }) {
   );
 }
 
-// CurrencySelector.propTypes = {
-//   setGlobalCurrency: React.PropTypes.func.isRequired,
-//   localCurrency: React.PropTypes.string.isRequired,
-// };
+CurrencySelector.propTypes = {
+  localCurrency: PropTypes.string.isRequired,
+  setLocalCurrency: PropTypes.func.isRequired,
+};

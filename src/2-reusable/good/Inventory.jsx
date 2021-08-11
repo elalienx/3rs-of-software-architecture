@@ -1,7 +1,7 @@
-import React from "react";
+import PropTypes from "prop-types";
 
 export default function Inventory(props) {
-  const { localCurrency, inventory, currencyConverter } = props;
+  const { currencyConverter, inventory, localCurrency } = props;
 
   return (
     <div>
@@ -36,8 +36,8 @@ export default function Inventory(props) {
   );
 }
 
-// Inventory.propTypes = {
-//   inventory: React.PropTypes.object.isRequired,
-//   currencyConverter: React.PropTypes.object.isRequired,
-//   localCurrency: React.PropTypes.string.isRequired,
-// };
+Inventory.propTypes = {
+  currencyConverter: PropTypes.object.isRequired,
+  inventory: PropTypes.array.isRequired,
+  localCurrency: PropTypes.string.isRequired,
+};

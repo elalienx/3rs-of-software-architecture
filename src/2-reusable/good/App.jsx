@@ -31,7 +31,6 @@ export default function App() {
     },
   ]);
   const [localCurrency, setLocalCurrency] = useState("usd");
-  const [globalCurrency, setGlobalCurrency] = useState("");
 
   // Most likely we would fetch this from an external source if this were a real app
   const currencyConversions = {
@@ -53,8 +52,8 @@ export default function App() {
         setLocalCurrency={setLocalCurrency}
       />
       <Inventory
-        inventory={inventory}
         currencyConverter={new CurrencyConverter(currencyConversions)}
+        inventory={inventory}
         localCurrency={localCurrency}
       />
     </div>
