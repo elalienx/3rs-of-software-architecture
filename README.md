@@ -66,244 +66,32 @@ This improved code now exhibits the following features:
 
 Reusability is the sole reason you are able to read this code, communicate with strangers online, and even program at all. Reusability allows us to express new ideas with little pieces of the past.
 
-That is why reusability is such an essential concept that should guide your software architecture. We commonly think of reusability in terms of [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) (Don't Repeat Yourself). That is one aspect of it -- don't have duplicate code if you can abstract it properly. Reusability goes beyond that though. It's about making clean, simple APIs that make your fellow progammer say, "Yep, I know exactly what that does!" Reusability makes your code a delight to work with, and it means you can ship features faster.
+That is why reusability is such an essential concept that should guide your software architecture. We commonly think of reusability in terms of [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) (Don't Repeat Yourself). That is one aspect of it -- don't have duplicate code if you can abstract it properly. Reusability goes beyond that though. It's about making clean, simple API's that make your fellow progammer say, _"Yep, I know exactly what that does!"_ Reusability makes your code a delight to work with, and it means you can ship features faster.
 
 We will look at our previous example and expand upon it by adding a currency converter to handle our inventory's pricing in multiple countries:
 
 [Right click and choose open in a new tab](src/2-reusable/bad/App.jsx)
 
-This code works, but merely working is not the point of code. That's why we need to look at this with a stronger lens than just analyzing if it works and it's readable. We have to look if it's reusable. Do you notice any issues?
+This code works, **but merely working is not the point of coding**. That's why we need to look at this with a stronger lens than just analyzing if it works and it's readable. We have to look if it's reusable. Do you notice any issues?
 
 Think about it!
 
 Alright, there are 3 main issues in the code above:
 
-- The Currency Selector is coupled to the Inventory component.
-- The Currency Converter is coupled to the Inventory component.
-- The Inventory data is defined explicitly in the Inventory component and this isn't provided to the component using an external API.
+1. The Currency Selector is coupled to the Inventory component.
+1. The Currency Converter is coupled to the Inventory component.
+1. The Inventory data is defined explicitly in the Inventory component and this isn't provided to the component using an external API.
 
 Every function and module should just do one thing, otherwise it can be very difficult to figure out what is going on when you look at the source code. The Inventory component should just be for displaying an inventory, not converting and selecting currencies. The benefit of making modules and functions do one thing is that they are easier to test and they are easier to reuse. If we wanted to use our Currency Converter in another part of the application, we would have to include the whole Inventory component. That doesn't make sense if we just need to convert currency.
 
 Let's see what this looks like with more reusable components:
 
-```javascript
-// src/2-reusable/good/currency-converter.js
-export default class CurrencyConverter {
-  constructor(currencyConversions) {
-    this.currencyConversions = currencyConversions;
-    this.currencySymbols = {
-      usd: "$",
-      rupee: "₹",
-      yuan: "元",
-    };
-  }
+**Project structure:**
 
-  convert(amount, fromCurrency, toCurrency) {
-    const convertedCurreny =
-      amount * this.currencyConversions[fromCurrency][toCurrency];
-    return this.currencySymbols[toCurrency] + convertedCurreny;
-  }
-}
-```
-
-```javascript
-// src/2-reusable/good/currency-selector.js
-
-import React, { Component } from "react";
-
-class CurrencySelector extends Component {
-  constructor(props) {
-    super();
-    this.props = props;
-    this.state = {
-      localCurrency: props.localCurrency.currency,
-    };
-
-    this.setGlobalCurrency = props.setGlobalCurrency;
-  }
-
-  onSelectCurrency(e) {
-    const currency = e.target.value;
-
-    this.setGlobalCurrency(currency);
-
-    this.setState({
-      localCurrency: currency,
-    });
-  }
-
-  render() {
-    return (
-      <div>
-        <label htmlFor="currencySelector">Currency:</label>
-        <select
-          className="u-full-width"
-          id="currencySelector"
-          onChange={this.onSelectCurrency.bind(this)}
-          value={this.state.localCurrency}
-        >
-          <option value="usd">USD</option>
-          <option value="rupee">Rupee</option>
-          <option value="yuan">Yuan</option>
-        </select>
-      </div>
-    );
-  }
-}
-
-CurrencySelector.propTypes = {
-  setGlobalCurrency: React.PropTypes.func.isRequired,
-  localCurrency: React.PropTypes.string.isRequired,
-};
-
-export default CurrencySelector;
-```
-
-```javascript
-// src/2-reusable/good/inventory.js
-
-import React, { Component } from "react";
-
-class Inventory extends Component {
-  constructor(props) {
-    super();
-    this.state = {
-      localCurrency: props.localCurrency,
-      inventory: props.inventory,
-    };
-
-    this.CurrencyConverter = props.currencyConverter;
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      localCurrency: nextProps.localCurrency,
-    });
-  }
-
-  render() {
-    return (
-      <div>
-        <table style={{ width: "100%" }}>
-          <tbody>
-            <tr>
-              <th>Product</th>
-
-              <th>Image</th>
-
-              <th>Description</th>
-
-              <th>Price</th>
-            </tr>
-
-            {Object.keys(this.state.inventory).map((itemId) => (
-              <tr key={itemId}>
-                <td>{this.state.inventory[itemId].product}</td>
-
-                <td>
-                  <img src={this.state.inventory[itemId].img} alt="" />
-                </td>
-
-                <td>{this.state.inventory[itemId].desc}</td>
-
-                <td>
-                  {this.CurrencyConverter.convert(
-                    this.state.inventory[itemId].price,
-                    this.state.inventory[itemId].currency,
-                    this.state.localCurrency
-                  )}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    );
-  }
-}
-
-Inventory.propTypes = {
-  inventory: React.PropTypes.object.isRequired,
-  currencyConverter: React.PropTypes.object.isRequired,
-  localCurrency: React.PropTypes.string.isRequired,
-};
-
-export default Inventory;
-```
-
-```javascript
-// src/2-reusable/good/index.js
-
-import React, { Component } from "react";
-import CurrencyConverter from "./currency-converter";
-import Inventory from "./inventory";
-import CurrencySelector from "./currency-selector";
-
-export default class ReusableGood extends Component {
-  constructor() {
-    super();
-
-    this.inventory = {
-      1: {
-        product: "Flashlight",
-        img: "/flashlight.jpg",
-        desc: "A really great flashlight",
-        price: 100,
-        currency: "usd",
-      },
-      2: {
-        product: "Tin can",
-        img: "/tin_can.jpg",
-        desc: "Pretty much what you would expect from a tin can",
-        price: 32,
-        currency: "usd",
-      },
-      3: {
-        product: "Cardboard Box",
-        img: "/cardboard_box.png",
-        desc: "It holds things",
-        price: 5,
-        currency: "usd",
-      },
-    };
-
-    // Most likely we would fetch this from an external source if this were a real app
-    this.currencyConversions = {
-      usd: {
-        rupee: 66.78,
-        yuan: 6.87,
-        usd: 1,
-      },
-    };
-
-    this.state = {
-      localCurrency: "usd",
-    };
-
-    this.setGlobalCurrency = (currency) => {
-      this.setState({
-        localCurrency: currency,
-      });
-    };
-  }
-
-  render() {
-    return (
-      <div>
-        <CurrencySelector
-          setGlobalCurrency={this.setGlobalCurrency}
-          localCurrency={this.state.localCurrency}
-        />
-        <Inventory
-          inventory={this.inventory}
-          currencyConverter={new CurrencyConverter(this.currencyConversions)}
-          localCurrency={this.state.localCurrency}
-        />
-      </div>
-    );
-  }
-}
-```
+- `currency-converter.js` ([right click to open](src/2-reusable/good/currency-converter.js))
+- `App.jsx` ([right click to open](src/2-reusable/good/App.jsx))
+- `CurrencySelector.jsx` ([right click to open](src/2-reusable/good/CurrencySelector.jsx))
+- `Inventory.jsx` ([right click to open](src/2-reusable/good/Inventory.jsx))
 
 This code has improved a great deal. Now we have individual modules for currency selection and conversion. Moreover, we can now provide the inventory data to our Inventory component. That means that we could download the inventory data, for example, and provide it to the Inventory component without ever having to modify its source code. This decoupling is the Dependency Inversion Principle, and it's a powerful way of creating reusable code.
 
