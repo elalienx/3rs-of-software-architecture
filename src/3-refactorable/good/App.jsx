@@ -46,7 +46,7 @@ export default function App() {
 
   return (
     <div>
-      <h2>3 Bad</h2>
+      <h2>3 Good</h2>
       <p>Global currency: {localCurrency}</p>
 
       <CurrencySelector
