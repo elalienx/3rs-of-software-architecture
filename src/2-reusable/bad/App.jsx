@@ -1,8 +1,11 @@
+// NPM packages
 import { useState } from "react";
 
 export default function Inventory() {
+  // Local state
   const [localCurrency, setLocalCurrency] = useState("usd");
 
+  // Properties
   const inventory = [
     {
       id: 1,
@@ -42,6 +45,7 @@ export default function Inventory() {
     yuan: "元",
   };
 
+  // Methods
   function onSelectCurrency(event) {
     setLocalCurrency(event.target.value);
   }
@@ -56,6 +60,8 @@ export default function Inventory() {
   return (
     <div>
       <h2>2 Bad</h2>
+
+      {/* CurrencySelector */}
       <label>
         Currency:
         <select
@@ -69,6 +75,7 @@ export default function Inventory() {
         </select>
       </label>
 
+      {/* Inventory */}
       <table style={{ width: "100%" }}>
         <tbody>
           <tr>

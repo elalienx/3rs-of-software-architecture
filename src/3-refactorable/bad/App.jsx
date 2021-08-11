@@ -1,15 +1,21 @@
+// NPM Packages
 import { useState } from "react";
+
+// Project files
 import CurrencyConverter from "./currency-converter";
 import Cart from "./Cart";
 import CurrencySelector from "./CurrencySelector";
 import Inventory from "./Inventory";
 
 export default function App() {
+  // Global state
   // Global Cart, BAD!
   window.cart = [];
 
+  // Local state
   const [localCurrency, setLocalCurrency] = useState("usd");
 
+  // Properties
   const inventory = [
     {
       id: 1,
