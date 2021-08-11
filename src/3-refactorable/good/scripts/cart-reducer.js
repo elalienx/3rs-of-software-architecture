@@ -1,6 +1,12 @@
-export default function CartReducer(cart, action) {
+export default function CartReducer(state, action) {
   switch (action.type) {
     case "add":
-    case "empty"
+      const { itemId } = action;
+
+      return [...state, itemId];
+    case "empty":
+      return [];
+    default:
+      throw new Error("Unhandled action:", action.type);
   }
 }

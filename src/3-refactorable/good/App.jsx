@@ -5,9 +5,6 @@ import CurrencySelector from "./CurrencySelector";
 import Inventory from "./Inventory";
 
 export default function App() {
-  // Global Cart, BAD!
-  window.cart = [];
-
   const [localCurrency, setLocalCurrency] = useState("usd");
 
   const inventory = [

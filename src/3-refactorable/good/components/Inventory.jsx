@@ -3,11 +3,6 @@ import PropTypes from "prop-types";
 export default function Inventory(props) {
   const { currencyConverter, inventory, localCurrency } = props;
 
-  // Mutating an external state, BAD!
-  function onAddToCart(itemId) {
-    window.cart.push(itemId);
-  }
-
   return (
     <div>
       <table style={{ width: "100%" }}>
