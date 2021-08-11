@@ -70,7 +70,8 @@ Reusability is the sole reason you are able to read this code, communicate with 
 That is why reusability is such an essential concept that should guide your software architecture. We commonly think of reusability in terms of DRY (Don't Repeat Yourself). That is one aspect of it -- don't have duplicate code if you can abstract it properly. Reusability goes beyond that though. It's about making clean, simple APIs that make your fellow progammer say, "Yep, I know exactly what that does!" Reusability makes your code a delight to work with, and it means you can ship features faster.
 
 We will look at our previous example and expand upon it by adding a currency converter to handle our inventory's pricing in multiple countries:
-<a href="src/2-reusable/bad/App.jsx" target="_blank"  >Click here to open the code in a new tab.</a>
+<a target="_blank" href="src/2-reusable/bad/App.jsx"  >Click here to open the code in a new tab.</a>
+[go](http://stackoverflow.com){:target="\_blank"}
 
 This code works, but merely working is not the point of code. That's why we need to look at this with a stronger lens than just analyzing if it works and it's readable. We have to look if it's reusable. Do you notice any issues?
 
