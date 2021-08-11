@@ -44,6 +44,7 @@ These aren't the only things to consider, but they are immediate red flags. Fort
 - More than two levels of nesting can imply poor performance (in a loop), and it can be especially hard to read in long conditionals. Consider extracting nested logic into separate functions.
 
 Let's take a look at this first piece of our shopping cart application, to see what bad readability looks like. 
+
 [Click here to open the code in a new tab.](./src/1-readable/bad/App.jsx)
 
 There are a number of problems we can see right away:
@@ -53,6 +54,7 @@ There are a number of problems we can see right away:
 - Comments that are either unnecessary or serve the job of what a good variable name would.
 
 Let's take a look at how we could improve it:
+
 [Click here to open the code in a new tab.](src/1-readable/good/App.jsx)
 
 This improved code now exhibits the following features:
