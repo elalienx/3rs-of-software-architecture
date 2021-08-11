@@ -30,27 +30,31 @@ export default function Inventory() {
   ]);
 
   return (
-    <table style={{ width: "100%" }}>
-      <tbody>
-        <tr>
-          <th>Product</th>
-          <th>Image</th>
-          <th>Description</th>
-          <th>Price</th>
-        </tr>
-        {inventory.map((item) => {
-          return (
-            <tr key={item.id}>
-              <td>{item.product}</td>
-              <td>
-                <img src={item.image} alt="" />
-              </td>
-              <td>{item.description}</td>
-              <td>{item.price}</td>
-            </tr>
-          );
-        })}
-      </tbody>
-    </table>
+    <>
+      <h2>1 Good</h2>
+
+      <table style={{ width: "100%" }}>
+        <tbody>
+          <tr>
+            <th>Product</th>
+            <th>Image</th>
+            <th>Description</th>
+            <th>Price</th>
+          </tr>
+          {inventory.map((item) => {
+            return (
+              <tr key={item.id}>
+                <td>{item.product}</td>
+                <td>
+                  <img src={item.image} alt="" />
+                </td>
+                <td>{item.description}</td>
+                <td>{item.price}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </>
   );
 }

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CurrencyConverter from "./currency-converter";
 import Inventory from "./Inventory";
 import CurrencySelector from "./CurrencySelector";
@@ -30,7 +30,7 @@ export default function App() {
       currency: "usd",
     },
   ]);
-  const [globalCurrency, setGlobalCurrency] = useState(localCurrency);
+  const [globalCurrency, setGlobalCurrency] = useState("");
 
   // Most likely we would fetch this from an external source if this were a real app
   const currencyConversions = {
@@ -42,8 +42,11 @@ export default function App() {
   };
   const localCurrency = "usd";
 
+  useEffect(() => setGlobalCurrency(localCurrency), []);
+
   return (
     <div>
+      <h2>2 Good</h2>
       <CurrencySelector
         localCurrency={localCurrency}
         setGlobalCurrency={setGlobalCurrency}

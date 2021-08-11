@@ -31,6 +31,8 @@ function Inv(){
   ])
 
   return (
+    <>
+    <h2>1 Bad</h2>
     <table style={{width: '100%'}}>
     <tbody>
     <tr>
@@ -73,6 +75,7 @@ function Inv(){
       })}
   </tbody>
   </table>
+  </>
   );
 }
 

@@ -55,6 +55,7 @@ export default function Inventory() {
 
   return (
     <div>
+      <h2>2 Bad</h2>
       <label>
         Currency:
         <select
