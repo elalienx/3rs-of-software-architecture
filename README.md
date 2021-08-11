@@ -14,6 +14,8 @@ Despite our lack of agreement, there are a lot of definitions that can help brin
 
 While this definition and others can bring clarity to the elements that make up architecture, it doesn't give us a mental model to use when developing our applications. This project however, aims to give just that. By looking at 3 particular "ilities" (readability, reusability, and refactorability), we can form a hierarchy of architectural attributes that can give us a framework for thinking about our system's code and architecture. It won't give you an architecture per se, but it will guide you in thinking about what architecture works for your application.
 
+---
+
 ## What is This Project?
 
 This project is a guide that attempts to analyze 3 "ilities" of software architecture (readability, reusability, and refactorability), and show how we can form better code by thinking through these concepts hierarchically. This project is for any developer of any skill level, but if you are just starting out you will find more value in this than a seasoned practitioner.
@@ -23,6 +25,8 @@ The code we will be looking at is a very simple shopping cart application writte
 One more thing to reiterate: this project isn't the only way to look at software, and it certainly can't give you an architecture, but it's something that can hopefully guide your thinking, as it has guided mine.
 
 Without further ado, let's get started!
+
+---
 
 ## 1. Readability
 
@@ -225,6 +229,8 @@ npm run start
 ```
 
 Open a browser and see the app running at `http://localhost:3000/`
+
+---
 
 ## License
 
