@@ -1,7 +1,7 @@
 // Inventory
 import { useState } from "react";
 
-function inv(){
+function Inv(){
   const [c, setC] = 'usd' // currency
   const [i, setI] = useState([ // inventory
     {
@@ -76,4 +76,4 @@ function inv(){
   );
 }
 
-export default inv;
+export default Inv;

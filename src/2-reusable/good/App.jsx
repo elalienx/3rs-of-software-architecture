@@ -30,6 +30,7 @@ export default function App() {
       currency: "usd",
     },
   ]);
+  const [globalCurrency, setGlobalCurrency] = useState(localCurrency);
 
   // Most likely we would fetch this from an external source if this were a real app
   const currencyConversions = {

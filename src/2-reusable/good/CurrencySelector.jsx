@@ -1,3 +1,5 @@
+import React from "react";
+
 export default function CurrencySelector({ localCurrency, setGlobalCurrency }) {
   function onSelectCurrency(event) {
     const currency = event.target.value;
@@ -23,7 +25,7 @@ export default function CurrencySelector({ localCurrency, setGlobalCurrency }) {
   );
 }
 
-CurrencySelector.propTypes = {
-  setGlobalCurrency: React.PropTypes.func.isRequired,
-  localCurrency: React.PropTypes.string.isRequired,
-};
+// CurrencySelector.propTypes = {
+//   setGlobalCurrency: React.PropTypes.func.isRequired,
+//   localCurrency: React.PropTypes.string.isRequired,
+// };
