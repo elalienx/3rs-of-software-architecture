@@ -26,6 +26,8 @@ Without further ado, let's get started!
 
 ## 1. Readability
 
+### About
+
 Readability is the simplest way of assessing code quality and it's the most straightforward to fix. It is the most obvious thing you see right when you open up a piece of code, and it generally consists of:
 
 1. Formatting
@@ -42,15 +44,17 @@ These aren't the only things to consider, but they are immediate red flags. Fort
 1. **Function length:** The main point is that your function should do ONE thing, and ONE thing only. If your function, which calculates the price of an item after taxes, first has to connect to the database, look up the item, get the tax data, and then do the calculation, then it's clearly doing more than one thing. Long functions typically indicate too much is happening.
 1. **Nesting levels:** More than two levels of nesting can imply poor performance (in a loop), and it can be especially hard to read in long conditionals. Consider extracting nested logic into separate functions.
 
+### In practice
+
 Let's take a look at this first piece of our shopping cart application, to see what bad readability looks like.
 
 [Right click and choose open in a new tab.](./src/1-readable/bad/App.jsx)
 
 There are a number of problems we can see right away:
 
-- Inconsistent and unpleasant formatting.
-- Poorly named variables.
-- Comments that are either unnecessary or serve the job of what a good variable name would.
+1. Inconsistent and unpleasant formatting.
+1. Poorly named variables.
+1. Comments that are either unnecessary or serve the job of what a good variable name would.
 
 Let's take a look at how we could improve it:
 
@@ -58,17 +62,21 @@ Let's take a look at how we could improve it:
 
 This improved code now exhibits the following features:
 
-- It is consistently formatted using the automatic formatter Prettier.
-- Names are much more descriptive.
-- Comments are no longer needed because good naming serves to clarify the meaning of the code. Comments are needed when business logic is complex and when documentation is required.
+1. It is consistently formatted using the automatic formatter Prettier.
+1. Names are much more descriptive.
+1. Comments are no longer needed because good naming serves to clarify the meaning of the code. Comments are needed when business logic is complex and when documentation is required.
 
 ---
 
 ## 2. Reusability
 
+### About
+
 Reusability is the sole reason you are able to read this code, communicate with strangers online, and even program at all. Reusability allows us to express new ideas with little pieces of the past.
 
 That is why reusability is such an essential concept that should guide your software architecture. We commonly think of reusability in terms of [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) (Don't Repeat Yourself). That is one aspect of it -- don't have duplicate code if you can abstract it properly. Reusability goes beyond that though. It's about making clean, simple API's that make your fellow progammer say, _"Yep, I know exactly what that does!"_ Reusability makes your code a delight to work with, and it means you can ship features faster.
+
+### In practice
 
 We will look at our previous example and expand upon it by adding a currency converter to handle our inventory's pricing in multiple countries:
 
@@ -114,7 +122,7 @@ Refactorability is about the system as a whole. It's about how your reusable mod
 
 1. Static types
 1. Isolated side effects
-1. Tests
+1. Tests (shown after the practice exercice)
 
 #### 1. Static types
 
@@ -184,9 +192,9 @@ This improved code centralizes our side effects to an `action` function which ta
 
 This flow makes it possible to be sure that the state of your application can only be updated in one way, and that's through the _action_ -> _reducer_ -> _store_ -> _component_ pipeline. There's no global state to modify, no messages to pass and keep track of, and no uncontrolled side effects that our modules can produce. The best part is, we can keep track of the entire state of our application so debugging and QA can become much easier, because we have an exact snapshot in time of our entire application.
 
-One caveat to note: you might not need Redux in this project's example application, but if we were to expand this code it would become easier to use Redux as the state management solution instead of putting everything in the top-level controller `index.js`. We could have isolated the state of our app there and passed the appropriate data-modifying action functions down through each module. The issue with that is that at scale, we would have a lot of actions to pass down and a lot of data that would live in one massive `index.js` controller. By committing to a proper centralization of state early, we won't need to change much as our application develops.
+One caveat to note: you might not need Redux in this project's example application, but if we were to expand this code it would become easier to use Redux as the state management solution instead of putting everything in the top-level controlling file `App.jsx`. We could have isolated the state of our app there and passed the appropriate data-modifying action functions down through each module. The issue with that is that at scale, we would have a lot of actions to pass down and a lot of data that would live in one massive `App.jsx`. By committing to a proper centralization of state early, we won't need to change much as our application growths.
 
-#### 3 Test
+#### 3. Test
 
 The last thing we need to look at is tests. Tests give us confidence that we can change a module and it will still do what it was intended to do. We will look at the tests for the Cart and Inventory components:
 
