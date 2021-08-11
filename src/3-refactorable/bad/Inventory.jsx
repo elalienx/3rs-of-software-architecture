@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 class Inventory extends Component {
   constructor(props) {
@@ -25,49 +25,35 @@ class Inventory extends Component {
   render() {
     return (
       <div>
-        <table style={{ width: '100%' }}>
+        <table style={{ width: "100%" }}>
           <tbody>
             <tr>
-              <th>
-                Product
-              </th>
+              <th>Product</th>
 
-              <th>
-                Image
-              </th>
+              <th>Image</th>
 
-              <th>
-                Description
-              </th>
+              <th>Description</th>
 
-              <th>
-                Price
-              </th>
+              <th>Price</th>
 
-              <th>
-                Cart
-              </th>
+              <th>Cart</th>
             </tr>
 
-            {Object.keys(this.state.inventory).map(itemId => (
+            {Object.keys(this.state.inventory).map((itemId) => (
               <tr key={itemId}>
-                <td>
-                  {this.state.inventory[itemId].product}
-                </td>
+                <td>{this.state.inventory[itemId].product}</td>
 
                 <td>
                   <img src={this.state.inventory[itemId].img} alt="" />
                 </td>
 
-                <td>
-                  {this.state.inventory[itemId].desc}
-                </td>
+                <td>{this.state.inventory[itemId].desc}</td>
 
                 <td>
                   {this.CurrencyConverter.convert(
                     this.state.inventory[itemId].price,
                     this.state.inventory[itemId].currency,
-                    this.state.localCurrency,
+                    this.state.localCurrency
                   )}
                 </td>
 

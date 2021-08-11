@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import CurrencyConverter from './currency-converter';
-import CurrencySelector from './currency-selector';
-import Inventory from './inventory';
-import Cart from './cart';
+import React, { Component } from "react";
+import CurrencyConverter from "./currency-converter";
+import CurrencySelector from "./CurrencySelector";
+import Inventory from "./Inventory";
+import Cart from "./Cart";
 
-export default class RefactorableBad extends Component {
+export default class App extends Component {
   constructor() {
     super();
 
@@ -13,25 +13,25 @@ export default class RefactorableBad extends Component {
 
     this.inventory = {
       1: {
-        product: 'Flashlight',
-        img: '/flashlight.jpg',
-        desc: 'A really great flashlight',
+        product: "Flashlight",
+        img: "/flashlight.jpg",
+        desc: "A really great flashlight",
         price: 100,
-        currency: 'usd',
+        currency: "usd",
       },
       2: {
-        product: 'Tin can',
-        img: '/tin_can.jpg',
-        desc: 'Pretty much what you would expect from a tin can',
+        product: "Tin can",
+        img: "/tin_can.jpg",
+        desc: "Pretty much what you would expect from a tin can",
         price: 32,
-        currency: 'usd',
+        currency: "usd",
       },
       3: {
-        product: 'Cardboard Box',
-        img: '/cardboard_box.png',
-        desc: 'It holds things',
+        product: "Cardboard Box",
+        img: "/cardboard_box.png",
+        desc: "It holds things",
         price: 5,
-        currency: 'usd',
+        currency: "usd",
       },
     };
 
@@ -44,7 +44,7 @@ export default class RefactorableBad extends Component {
     };
 
     this.state = {
-      localCurrency: 'usd',
+      localCurrency: "usd",
     };
 
     this.setGlobalCurrency = (currency) => {
@@ -57,6 +57,8 @@ export default class RefactorableBad extends Component {
   render() {
     return (
       <div>
+        <h2>3 Bad</h2>
+
         <CurrencySelector
           setGlobalCurrency={this.setGlobalCurrency}
           localCurrency={this.state.localCurrency}
