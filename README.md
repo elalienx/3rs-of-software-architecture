@@ -116,7 +116,7 @@ Now, it's time for a bit of caution. Before diving in and making everything reus
 
 ---
 
-## 3. Refactorability
+## 3. Refactorability (imcomplete...)
 
 ### About
 
