@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
-import classNames from 'classnames/bind';
+import React, { Component } from "react";
+import classNames from "classnames/bind";
 
-import ReadableBad from './1-readable/bad';
-import ReadableGood from './1-readable/good';
-import ReusableBad from './2-reusable/bad';
-import ReusableGood from './2-reusable/good';
-import RefactorableBad from './3-refactorable/bad';
-import RefactorableGood from './3-refactorable/good';
-import styles from './index.css';
+import ReadableBad from "./1-readable/bad/App";
+import ReadableGood from "./1-readable/good/App";
+import ReusableBad from "./2-reusable/bad/App";
+import ReusableGood from "./2-reusable/good/App";
+// import RefactorableBad from "./3-refactorable/bad";
+// import RefactorableGood from "./3-refactorable/good";
+import styles from "./index.css";
 
 const examples = {
   readable: {
@@ -18,10 +18,10 @@ const examples = {
     bad: ReusableBad,
     good: ReusableGood,
   },
-  refactorable: {
-    bad: RefactorableBad,
-    good: RefactorableGood,
-  },
+  // refactorable: {
+  //   bad: RefactorableBad,
+  //   good: RefactorableGood,
+  // },
 };
 
 const cx = classNames.bind(styles);
@@ -34,8 +34,8 @@ export default class App extends Component {
   constructor() {
     super();
     this.state = {
-      section: 'refactorable',
-      quality: 'good',
+      section: "refactorable",
+      quality: "good",
     };
   }
 
@@ -55,9 +55,7 @@ export default class App extends Component {
     return (
       <div className="container">
         <div className="row">
-          <h2 className={titleClass}>
-            3 Rs of Software Architecture
-          </h2>
+          <h2 className={titleClass}>3 Rs of Software Architecture</h2>
         </div>
 
         <div className="row">
@@ -92,7 +90,9 @@ export default class App extends Component {
         <hr />
 
         <div className="row">
-          {React.createElement(examples[this.state.section][this.state.quality])}
+          {React.createElement(
+            examples[this.state.section][this.state.quality]
+          )}
         </div>
       </div>
     );

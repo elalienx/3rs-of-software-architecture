@@ -79,9 +79,9 @@ Think about it!
 
 Alright, there are 3 main issues in the code above:
 
-- The Currency Selector is coupled to the Inventory component
-- The Currency Converter is coupled to the Inventory component
-- The Inventory data is defined explicitly in the Inventory component and this isn't provided to the component in an API.
+- The Currency Selector is coupled to the Inventory component.
+- The Currency Converter is coupled to the Inventory component.
+- The Inventory data is defined explicitly in the Inventory component and this isn't provided to the component using an external API.
 
 Every function and module should just do one thing, otherwise it can be very difficult to figure out what is going on when you look at the source code. The Inventory component should just be for displaying an inventory, not converting and selecting currencies. The benefit of making modules and functions do one thing is that they are easier to test and they are easier to reuse. If we wanted to use our Currency Converter in another part of the application, we would have to include the whole Inventory component. That doesn't make sense if we just need to convert currency.
 

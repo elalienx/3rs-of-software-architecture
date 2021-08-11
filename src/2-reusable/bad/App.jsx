@@ -36,7 +36,6 @@ export default function Inventory() {
       usd: 1,
     },
   };
-
   const currencySymbols = {
     usd: "$",
     rupee: "₹",

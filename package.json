@@ -1,37 +1,36 @@
 {
   "name": "3rs-of-software-architecture",
   "version": "0.0.1",
-  "description": "Readability, Reusability, and Refactorability",
-  "main": "index.js",
+  "private": false,
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-scripts": "4.0.3"
+  },
   "scripts": {
     "start": "react-scripts start",
-    "test": "react-scripts test --env=jsdom",
-    "build": "react-scripts build"
+    "build": "react-scripts build",
+    "test": "react-scripts test"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ryanmcdermott/3rs-of-software-architecture.git"
+  "jest": {
+    "resetMocks": false
   },
-  "keywords": [
-    "software architecture",
-    "clean code"
-  ],
-  "author": "Ryan McDermott",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/ryanmcdermott/3rs-of-software-architecture/issues"
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
   },
-  "homepage": "https://github.com/ryanmcdermott/3rs-of-software-architecture#readme",
-  "devDependencies": {
-    "classnames": "^2.2.5",
-    "enzyme": "^2.7.1",
-    "react-addons-test-utils": "^15.4.2",
-    "react-scripts": "0.9.2"
-  },
-  "dependencies": {
-    "react": "17.0.0",
-    "react-dom": "17.0.0",
-    "redux": "3.6.0",
-    "react-redux": "5.0.3"
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
