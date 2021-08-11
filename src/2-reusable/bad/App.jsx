@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 export default function Inventory() {
-  const [localCurrency, setLocalCurrency] = "usd";
+  const [localCurrency, setLocalCurrency] = useState("usd");
   const [inventory, setInventory] = useState([
     {
       id: 1,
@@ -49,22 +49,25 @@ export default function Inventory() {
   function convertCurrency(amount, fromCurrency, toCurrency) {
     const convertedCurrency =
       amount * currencyConversions[fromCurrency][toCurrency];
+
     return currencySymbols[toCurrency] + convertedCurrency;
   }
 
   return (
     <div>
-      <label htmlFor="currencySelector">Currency:</label>
-      <select
-        className="u-full-width"
-        id="currencySelector"
-        onChange={onSelectCurrency}
-        value={localCurrency}
-      >
-        <option value="usd">USD</option>
-        <option value="rupee">Rupee</option>
-        <option value="yuan">Yuan</option>
-      </select>
+      <label>
+        Currency:
+        <select
+          className="u-full-width"
+          onChange={onSelectCurrency}
+          value={localCurrency}
+        >
+          <option value="usd">USD</option>
+          <option value="rupee">Rupee</option>
+          <option value="yuan">Yuan</option>
+        </select>
+      </label>
+
       <table style={{ width: "100%" }}>
         <tbody>
           <tr>
@@ -73,7 +76,6 @@ export default function Inventory() {
             <th>Description</th>
             <th>Price</th>
           </tr>
-
           {inventory.map((item) => (
             <tr key={item.id}>
               <td>{item.product}</td>
