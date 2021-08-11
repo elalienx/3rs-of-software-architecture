@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useReducer, useState } from "react";
 import CurrencyConverter from "./currency-converter";
 import Cart from "./Cart";
 import CurrencySelector from "./CurrencySelector";

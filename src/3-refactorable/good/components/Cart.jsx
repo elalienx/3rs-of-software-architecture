@@ -1,19 +1,10 @@
-import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import cartReducer from "../scripts/cartReducer";
 
 export default function Cart(props) {
   const { currencyConverter, inventory, localCurrency } = props;
 
-  const [cart, setCart] = useState([]);
-
-  // Repeatedly sync global cart to local cart, BAD!
-  useEffect(() => {
-    setInterval(() => {
-      const updatedCart = [...window.cart];
-
-      setCart(updatedCart);
-    }, 1000);
-  }, [setCart]);
+  const [cart, dispatch] = useReducer(cartReducer, []);
 
   return (
     <div>
@@ -41,7 +32,9 @@ export default function Cart(props) {
               ))}
             </tbody>
           </table>
-          <button onClick={onEmptyCart}>Empty cart</button>
+          <button onClick={() => dispatch({ type: "empty" })}>
+            Empty cart
+          </button>
         </>
       )}
     </div>

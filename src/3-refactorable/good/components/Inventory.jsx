@@ -30,7 +30,9 @@ export default function Inventory(props) {
                 )}
               </td>
               <td>
-                <button onClick={() => onAddToCart(item.id)}>
+                <button
+                  onClick={() => dispatch({ type: "add", itemId: item.id })}
+                >
                   Add to Cart
                 </button>
               </td>
