@@ -1,8 +1,6 @@
-import { useState } from "react";
-
 export default function Inventory() {
-  const [localCurrency, setLocalCurrency] = "usd";
-  const [inventory, setInventory] = useState([
+  const localCurrency = "usd";
+  const inventory = [
     {
       id: 1,
       product: "Flashlight",
@@ -27,11 +25,12 @@ export default function Inventory() {
       price: 5,
       currency: "usd",
     },
-  ]);
+  ];
 
   return (
     <>
       <h2>1 Good</h2>
+      <p>Global currency: {localCurrency}</p>
 
       <table style={{ width: "100%" }}>
         <tbody>

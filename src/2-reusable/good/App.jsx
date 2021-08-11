@@ -4,7 +4,9 @@ import Inventory from "./Inventory";
 import CurrencySelector from "./CurrencySelector";
 
 export default function App() {
-  const [inventory, setInventory] = useState([
+  const [localCurrency, setLocalCurrency] = useState("usd");
+
+  const inventory = [
     {
       id: 1,
       product: "Flashlight",
@@ -29,9 +31,7 @@ export default function App() {
       price: 5,
       currency: "usd",
     },
-  ]);
-  const [localCurrency, setLocalCurrency] = useState("usd");
-
+  ];
   // Most likely we would fetch this from an external source if this were a real app
   const currencyConversions = {
     usd: {

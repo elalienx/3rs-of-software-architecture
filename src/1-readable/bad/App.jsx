@@ -1,9 +1,7 @@
 // Inventory
-import { useState } from "react";
-
 function Inv(){
-  const [c, setC] = 'usd' // currency
-  const [i, setI] = useState([ // inventory
+  const c = 'usd' // currency
+  const i =[ // inventory
     {
       product: 'Flashlight',
       img: '/flashlight.jpg',
@@ -28,11 +26,13 @@ function Inv(){
       id: 3,
       c: 'usd'
     }
-  ])
+  ]
 
   return (
     <>
     <h2>1 Bad</h2>
+    <p>Global currency: {c}</p>
+
     <table style={{width: '100%'}}>
     <tbody>
     <tr>

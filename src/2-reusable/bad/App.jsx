@@ -2,7 +2,8 @@ import { useState } from "react";
 
 export default function Inventory() {
   const [localCurrency, setLocalCurrency] = useState("usd");
-  const [inventory, setInventory] = useState([
+
+  const inventory = [
     {
       id: 1,
       product: "Flashlight goood!!",
@@ -27,8 +28,7 @@ export default function Inventory() {
       price: 5,
       currency: "usd",
     },
-  ]);
-
+  ];
   const currencyConversions = {
     usd: {
       rupee: 66.78,
