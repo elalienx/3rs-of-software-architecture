@@ -1,3 +1,5 @@
+Original authors: [Ryan McDermott](https://github.com/ryanmcdermott) and [Burak Sonmez](https://github.com/bsonmez). See forked project licence for more info.
+
 # 3 Rs of Software Architecture
 
 ![software architecture pyramid](public/software-architecture-pyramid.png)
