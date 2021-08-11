@@ -37,8 +37,8 @@ Readability is the simplest way of assessing code quality and it's the most stra
 These aren't the only things to consider, but they are immediate red flags. Fortunately, there are a few easy rules to follow to fix problems associated with those above:
 
 1. **Formatting:** Invest in an automatic formatter. Find one your team agrees on and integrate it into your build process. There's nothing that wastes more time and money during code reviews than formatting arguments. Get a formatter and never look back! In this project we will use [Prettier](https://prettier.io).
-1. **Variable and Function names:** Use meaningful and pronounceable variable/function names. Code is for people, and only incidentally for computers. Naming is the biggest thing that communicates the meaning behind your code.
-1. **Amount of function arguments:** Limit your function arguments to between 1-3. Having 0 arguments implies you're mutating state or relying on state coming from somewhere else other than your caller. More than 3 arguments is just plain hard to read. Refactoring becomes difficult because there are so many paths your function can take the more arguments it has. Making unit testing even harder to implement.
+1. **Variable and Function names:** Use meaningful and pronounceable variable and function names. Code is for people, and only incidentally for computers. Naming is the biggest thing that communicates the meaning behind your code.
+1. **Amount of function arguments:** Limit your function arguments to between 1-3. Having 0 arguments implies you're mutating state or relying on state coming from somewhere else other than your caller. More than 3 arguments is just plain hard to read. Refactoring becomes difficult because there are so many paths your function can take the more arguments it has, making unit testing even harder to implement.
 1. **Function length:** The main point is that your function should do ONE thing, and ONE thing only. If your function, which calculates the price of an item after taxes, first has to connect to the database, look up the item, get the tax data, and then do the calculation, then it's clearly doing more than one thing. Long functions typically indicate too much is happening.
 1. **Nesting levels:** More than two levels of nesting can imply poor performance (in a loop), and it can be especially hard to read in long conditionals. Consider extracting nested logic into separate functions.
 
@@ -66,7 +66,7 @@ This improved code now exhibits the following features:
 
 Reusability is the sole reason you are able to read this code, communicate with strangers online, and even program at all. Reusability allows us to express new ideas with little pieces of the past.
 
-That is why reusability is such an essential concept that should guide your software architecture. We commonly think of reusability in terms of DRY (Don't Repeat Yourself). That is one aspect of it -- don't have duplicate code if you can abstract it properly. Reusability goes beyond that though. It's about making clean, simple APIs that make your fellow progammer say, "Yep, I know exactly what that does!" Reusability makes your code a delight to work with, and it means you can ship features faster.
+That is why reusability is such an essential concept that should guide your software architecture. We commonly think of reusability in terms of [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) (Don't Repeat Yourself). That is one aspect of it -- don't have duplicate code if you can abstract it properly. Reusability goes beyond that though. It's about making clean, simple APIs that make your fellow progammer say, "Yep, I know exactly what that does!" Reusability makes your code a delight to work with, and it means you can ship features faster.
 
 We will look at our previous example and expand upon it by adding a currency converter to handle our inventory's pricing in multiple countries:
 
