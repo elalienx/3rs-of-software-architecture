@@ -144,7 +144,7 @@ A _side effect_ is when your function or module modifies data outside the scope 
 
 How do we isolate side effects? The answer is by making one central place to update global state of our application. There are many great ways to do this for a client-side JavaScript application, but for this project we will use Context API.
 
-## In practice
+### In practice
 
 We will modify our existing code to incorporate a shopping cart. Let's take a look at this new code and see why it's NOT refactorable:
 
