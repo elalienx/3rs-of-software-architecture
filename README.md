@@ -4,7 +4,9 @@ Original authors: [Ryan McDermott](https://github.com/ryanmcdermott) and [Burak 
 
 ![software architecture pyramid](public/software-architecture-pyramid.png)
 
-## Software Architecture
+## Introduction
+
+### Software Architecture
 
 After 50+ years of software engineering's existence, we haven't settled on an exact definition of what software architecture is. After all, it is the art in computer science -- persistently evading our most determined of efforts to define it. Even still, it's so vital to the fabric of our industry and applications, that it's impossible to ignore.
 
@@ -14,9 +16,7 @@ Despite our lack of agreement, there are a lot of definitions that can help brin
 
 While this definition and others can bring clarity to the elements that make up architecture, it doesn't give us a mental model to use when developing our applications. This project however, aims to give just that. By looking at 3 particular "ilities" (readability, reusability, and refactorability), we can form a hierarchy of architectural attributes that can give us a framework for thinking about our system's code and architecture. It won't give you an architecture per se, but it will guide you in thinking about what architecture works for your application.
 
----
-
-## What is This Project?
+### What is This Project?
 
 This project is a guide that attempts to analyze 3 "ilities" of software architecture (readability, reusability, and refactorability), and show how we can form better code by thinking through these concepts hierarchically. This project is for any developer of any skill level, but if you are just starting out you will find more value in this than a seasoned practitioner.
 
