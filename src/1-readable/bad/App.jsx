@@ -2,7 +2,7 @@
 import { useState } from "react";
 
 function inv(){
-  const c = 'usd' // currency
+  const [c, setC] = 'usd' // currency
   const [i, setI] = useState([ // inventory
     {
       product: 'Flashlight',

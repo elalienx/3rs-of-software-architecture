@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 export default function Inventory() {
-  const localCurrency = "usd";
+  const [localCurrency, setLocalCurrency] = "usd";
   const [inventory, setInventory] = useState([
     {
       id: 1,
@@ -34,24 +34,18 @@ export default function Inventory() {
       <tbody>
         <tr>
           <th>Product</th>
-
           <th>Image</th>
-
           <th>Description</th>
-
           <th>Price</th>
         </tr>
         {inventory.map((item) => {
           return (
             <tr key={item.id}>
               <td>{item.product}</td>
-
               <td>
                 <img src={item.image} alt="" />
               </td>
-
               <td>{item.description}</td>
-
               <td>{item.price}</td>
             </tr>
           );

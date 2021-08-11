@@ -43,7 +43,7 @@ These aren't the only things to consider, but they are immediate red flags. Fort
 - There is no set limit of lines for a function, as this depends on what particular language you are coding in. The main point is that your function should do ONE thing, and ONE thing only. If your function, which calculates the price of an item after taxes, first has to connect to the database, look up the item, get the tax data, and then do the calculation, then it's clearly doing more than one thing. Long functions typically indicate too much is happening.
 - More than two levels of nesting can imply poor performance (in a loop), and it can be especially hard to read in long conditionals. Consider extracting nested logic into separate functions.
 
-Let's take a look at this first piece of our shopping cart application, to see what bad readability looks like. 
+Let's take a look at this first piece of our shopping cart application, to see what bad readability looks like.
 
 [Click here to open the code in a new tab.](./src/1-readable/bad/App.jsx)
 
@@ -70,120 +70,7 @@ Reusability is the sole reason you are able to read this code, communicate with 
 That is why reusability is such an essential concept that should guide your software architecture. We commonly think of reusability in terms of DRY (Don't Repeat Yourself). That is one aspect of it -- don't have duplicate code if you can abstract it properly. Reusability goes beyond that though. It's about making clean, simple APIs that make your fellow progammer say, "Yep, I know exactly what that does!" Reusability makes your code a delight to work with, and it means you can ship features faster.
 
 We will look at our previous example and expand upon it by adding a currency converter to handle our inventory's pricing in multiple countries:
-
-```javascript
-// src/2-reusable/bad/index.js
-import React, { Component } from "react";
-
-export default class Inventory extends Component {
-  constructor() {
-    super();
-    this.state = {
-      localCurrency: "usd",
-      inventory: {
-        1: {
-          product: "Flashlight",
-          img: "/flashlight.jpg",
-          desc: "A really great flashlight",
-          price: 100,
-          currency: "usd",
-        },
-        2: {
-          product: "Tin can",
-          img: "/tin_can.jpg",
-          desc: "Pretty much what you would expect from a tin can",
-          price: 32,
-          currency: "usd",
-        },
-        3: {
-          product: "Cardboard Box",
-          img: "/cardboard_box.png",
-          desc: "It holds things",
-          price: 5,
-          currency: "usd",
-        },
-      },
-    };
-
-    this.currencyConversions = {
-      usd: {
-        rupee: 66.78,
-        yuan: 6.87,
-        usd: 1,
-      },
-    };
-
-    this.currencySymbols = {
-      usd: "$",
-      rupee: "₹",
-      yuan: "元",
-    };
-  }
-
-  onSelectCurrency(e) {
-    this.setState({
-      localCurrency: e.target.value,
-    });
-  }
-
-  convertCurrency(amount, fromCurrency, toCurrency) {
-    const convertedCurrency =
-      amount * this.currencyConversions[fromCurrency][toCurrency];
-    return this.currencySymbols[toCurrency] + convertedCurrency;
-  }
-
-  render() {
-    return (
-      <div>
-        <label htmlFor="currencySelector">Currency:</label>
-        <select
-          className="u-full-width"
-          id="currencySelector"
-          onChange={this.onSelectCurrency.bind(this)}
-          value={this.state.localCurrency}
-        >
-          <option value="usd">USD</option>
-          <option value="rupee">Rupee</option>
-          <option value="yuan">Yuan</option>
-        </select>
-        <table style={{ width: "100%" }}>
-          <tbody>
-            <tr>
-              <th>Product</th>
-
-              <th>Image</th>
-
-              <th>Description</th>
-
-              <th>Price</th>
-            </tr>
-
-            {Object.keys(this.state.inventory).map((itemId) => (
-              <tr key={itemId}>
-                <td>{this.state.inventory[itemId].product}</td>
-
-                <td>
-                  <img src={this.state.inventory[itemId].img} alt="" />
-                </td>
-
-                <td>{this.state.inventory[itemId].desc}</td>
-
-                <td>
-                  {this.convertCurrency(
-                    this.state.inventory[itemId].price,
-                    this.state.inventory[itemId].currency,
-                    this.state.localCurrency
-                  )}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    );
-  }
-}
-```
+<a href="./src/2-readable/bad/App.jsx" target="_blank">Click here to open the code in a new tab.</a>
 
 This code works, but merely working is not the point of code. That's why we need to look at this with a stronger lens than just analyzing if it works and it's readable. We have to look if it's reusable. Do you notice any issues?
 
