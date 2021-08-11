@@ -26,13 +26,13 @@ export default function Cart(props) {
               <th>Product</th>
               <th>Price</th>
             </tr>
-            {inventory.map((item) => (
-              <tr key={item.id}>
-                <td>{item.product}</td>
+            {cart.map((itemId, index) => (
+              <tr key={index}>
+                <td>{inventory[itemId - 1].product}</td>
                 <td>
                   {currencyConverter.convert(
-                    item.price,
-                    item.currency,
+                    inventory[itemId - 1].price,
+                    inventory[itemId - 1].currency,
                     localCurrency
                   )}
                 </td>
