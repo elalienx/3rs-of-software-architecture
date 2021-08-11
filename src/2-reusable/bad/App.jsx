@@ -5,7 +5,7 @@ export default function Inventory() {
   const [inventory, setInventory] = useState([
     {
       id: 1,
-      product: "Flashlight",
+      product: "Flashlight goood!!",
       image: "/flashlight.jpg",
       description: "A really great flashlight",
       price: 100,

@@ -1,9 +1,9 @@
-import MyComponent from "./1-readable/bad/App";
+import MyApp from "./1-readable/good/App";
 
 export default function App() {
   return (
     <div className="App">
-      <MyComponent />
+      <MyApp />
     </div>
   );
 }
