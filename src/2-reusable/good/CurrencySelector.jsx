@@ -1,10 +1,10 @@
 import React from "react";
 
-export default function CurrencySelector({ localCurrency, setGlobalCurrency }) {
+export default function CurrencySelector({ localCurrency, setLocalCurrency }) {
   function onSelectCurrency(event) {
     const currency = event.target.value;
 
-    setGlobalCurrency(currency);
+    setLocalCurrency(currency);
   }
 
   return (
