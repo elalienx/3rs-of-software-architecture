@@ -5,7 +5,6 @@ export default function Inventory(props) {
 
   // Mutating an external state, BAD!
   function onAddToCart(itemId) {
-    console.log("Invetory.jsx onAddToCart() itemId", itemId);
     window.cart.push(itemId);
   }
 

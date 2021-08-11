@@ -8,21 +8,25 @@ export default function Cart(props) {
 
   // Repeatedly sync global cart to local cart, BAD!
   useEffect(() => {
-    window.setInterval(() => setCart(window.cart), 1000);
+    setInterval(() => {
+      const updatedCart = [...window.cart];
+
+      setCart(updatedCart);
+    }, 1000);
   }, [setCart]);
 
   return (
     <div>
       <h2>Cart</h2>
-      {cart.length === 0 ?? <p>Nothing in the cart</p>}
-      {cart.length > 0 ?? (
+      {cart.length === 0 && <p>Nothing to show</p>}
+      {cart.length > 0 && (
         <table style={{ width: "100%" }}>
           <tbody>
             <tr>
               <th>Product</th>
               <th>Price</th>
             </tr>
-            {cart.map((item) => (
+            {inventory.map((item) => (
               <tr key={item.id}>
                 <td>{item.product}</td>
                 <td>
