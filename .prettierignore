@@ -1,0 +1,2 @@
+# Ignore the bad file from the folder "1-readable" so people can see the effects of bad formatting
+src/1-readable/bad/App.jsx
