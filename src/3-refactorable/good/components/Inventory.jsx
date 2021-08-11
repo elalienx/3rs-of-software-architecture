@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 
 export default function Inventory(props) {
-  const { currencyConverter, inventory, localCurrency } = props;
+  const { currencyConverter, inventory, localCurrency, dispatch } = props;
 
   return (
     <div>

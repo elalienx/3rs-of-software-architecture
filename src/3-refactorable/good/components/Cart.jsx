@@ -1,10 +1,7 @@
 import PropTypes from "prop-types";
-import cartReducer from "../scripts/cartReducer";
 
 export default function Cart(props) {
-  const { currencyConverter, inventory, localCurrency } = props;
-
-  const [cart, dispatch] = useReducer(cartReducer, []);
+  const { currencyConverter, inventory, localCurrency, cart, dispatch } = props;
 
   return (
     <div>

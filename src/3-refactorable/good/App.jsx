@@ -1,10 +1,12 @@
-import { useReducer, useState } from "react";
-import CurrencyConverter from "./currency-converter";
-import Cart from "./Cart";
-import CurrencySelector from "./CurrencySelector";
-import Inventory from "./Inventory";
+import { useState, useReducer } from "react";
+import CurrencyConverter from "./scripts/currency-converter";
+import Cart from "./components/Cart";
+import CurrencySelector from "./components/CurrencySelector";
+import Inventory from "./components/Inventory";
+import cartReducer from "./scripts/cartReducer";
 
 export default function App() {
+  const [cart, dispatch] = useReducer(cartReducer, []);
   const [localCurrency, setLocalCurrency] = useState("usd");
 
   const inventory = [
@@ -55,11 +57,14 @@ export default function App() {
         currencyConverter={new CurrencyConverter(currencyConversions)}
         inventory={inventory}
         localCurrency={localCurrency}
+        dispatch={dispatch}
       />
       <Cart
         currencyConverter={new CurrencyConverter(currencyConversions)}
         inventory={inventory}
         localCurrency={localCurrency}
+        cart={cart}
+        dispatch={dispatch}
       />
     </div>
   );
