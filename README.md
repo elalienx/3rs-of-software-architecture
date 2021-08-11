@@ -45,7 +45,7 @@ These aren't the only things to consider, but they are immediate red flags. Fort
 
 Let's take a look at this first piece of our shopping cart application, to see what bad readability looks like.
 
-[Click here to open the code in a new tab.](./src/1-readable/bad/App.jsx)
+[Right click and choose open in a new tab.](./src/1-readable/bad/App.jsx)
 
 There are a number of problems we can see right away:
 
@@ -55,7 +55,7 @@ There are a number of problems we can see right away:
 
 Let's take a look at how we could improve it:
 
-[Click here to open the code in a new tab.](src/1-readable/good/App.jsx)
+[Right click and choose open in a new tab.](src/1-readable/good/App.jsx)
 
 This improved code now exhibits the following features:
 
