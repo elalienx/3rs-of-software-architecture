@@ -1,8 +1,12 @@
+// NPM Packages
 import { useState, useReducer } from "react";
-import CurrencyConverter from "./scripts/currency-converter";
+
+// Project files
 import Cart from "./components/Cart";
 import CurrencySelector from "./components/CurrencySelector";
 import Inventory from "./components/Inventory";
+import CurrencyConverter from "./scripts/currency-converter";
+import { CartContext } from "./scripts/cartContext";
 import cartReducer from "./scripts/cartReducer";
 
 export default function App() {
@@ -45,27 +49,24 @@ export default function App() {
   };
 
   return (
-    <div>
-      <h2>3 Good</h2>
-      <p>Global currency: {localCurrency}</p>
-
-      <CurrencySelector
-        localCurrency={localCurrency}
-        setLocalCurrency={setLocalCurrency}
-      />
-      <Inventory
-        currencyConverter={new CurrencyConverter(currencyConversions)}
-        inventory={inventory}
-        localCurrency={localCurrency}
-        dispatch={dispatch}
-      />
-      <Cart
-        currencyConverter={new CurrencyConverter(currencyConversions)}
-        inventory={inventory}
-        localCurrency={localCurrency}
-        cart={cart}
-        dispatch={dispatch}
-      />
-    </div>
+    <CartContext.Provider value={{ cart, dispatch }}>
+      <div>
+        <h2>3 Good</h2>
+        <CurrencySelector
+          localCurrency={localCurrency}
+          setLocalCurrency={setLocalCurrency}
+        />
+        <Inventory
+          currencyConverter={new CurrencyConverter(currencyConversions)}
+          inventory={inventory}
+          localCurrency={localCurrency}
+        />
+        <Cart
+          currencyConverter={new CurrencyConverter(currencyConversions)}
+          inventory={inventory}
+          localCurrency={localCurrency}
+        />
+      </div>
+    </CartContext.Provider>
   );
 }

@@ -54,8 +54,6 @@ export default function App() {
   return (
     <div>
       <h2>3 Bad</h2>
-      <p>Global currency: {localCurrency}</p>
-
       <CurrencySelector
         localCurrency={localCurrency}
         setLocalCurrency={setLocalCurrency}

@@ -1,8 +1,15 @@
 // NPM Packages
+import { useContext } from "react";
 import PropTypes from "prop-types";
 
+// Project files
+import { CartContext } from "../scripts/cartContext";
+
 export default function Cart(props) {
-  const { currencyConverter, inventory, localCurrency, cart, dispatch } = props;
+  const { currencyConverter, inventory, localCurrency } = props;
+
+  // Global state
+  const { cart, dispatch } = useContext(CartContext);
 
   return (
     <div>
