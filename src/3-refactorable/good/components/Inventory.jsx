@@ -1,15 +1,14 @@
 // NPM Packages
-import { useContext } from "react";
 import PropTypes from "prop-types";
 
 // Project files
-import { CartContext } from "../scripts/CartProvider";
+import { useCart } from "../state/CartProvider";
 
 export default function Inventory(props) {
   const { currencyConverter, inventory, localCurrency } = props;
 
   // Global state
-  const { dispatch } = useContext(CartContext);
+  const { dispatch } = useCart();
 
   return (
     <table style={{ width: "100%" }}>

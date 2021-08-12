@@ -1,10 +1,11 @@
 // NPM Packages
-import React, { useReducer } from "react";
+import React, { useContext, useReducer } from "react";
 
 // Project files
 import CartReducer from "./cart-reducer";
 
-export const CartContext = React.createContext(null);
+// Properties
+const CartContext = React.createContext(null);
 
 export function CartProvider(props) {
   // Global state
@@ -18,4 +19,10 @@ export function CartProvider(props) {
       {props.children}
     </CartContext.Provider>
   );
+}
+
+export function useCart() {
+  const context = useContext(CartContext);
+
+  return context;
 }
