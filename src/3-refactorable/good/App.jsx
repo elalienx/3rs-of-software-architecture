@@ -1,16 +1,15 @@
 // NPM Packages
-import { useState, useReducer } from "react";
+import { useState } from "react";
 
 // Project files
 import Cart from "./components/Cart";
 import CurrencySelector from "./components/CurrencySelector";
 import Inventory from "./components/Inventory";
+import { CartProvider } from "./scripts/CartProvider";
 import CurrencyConverter from "./scripts/currency-converter";
-import { CartContext } from "./scripts/cartContext";
-import cartReducer from "./scripts/cartReducer";
 
 export default function App() {
-  const [cart, dispatch] = useReducer(cartReducer, []);
+  // Local state
   const [localCurrency, setLocalCurrency] = useState("usd");
 
   const inventory = [
@@ -49,7 +48,7 @@ export default function App() {
   };
 
   return (
-    <CartContext.Provider value={{ cart, dispatch }}>
+    <CartProvider>
       <div>
         <h2>3 Good</h2>
         <CurrencySelector
@@ -67,6 +66,6 @@ export default function App() {
           localCurrency={localCurrency}
         />
       </div>
-    </CartContext.Provider>
+    </CartProvider>
   );
 }

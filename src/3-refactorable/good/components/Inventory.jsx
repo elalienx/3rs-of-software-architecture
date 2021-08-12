@@ -3,7 +3,7 @@ import { useContext } from "react";
 import PropTypes from "prop-types";
 
 // Project files
-import { CartContext } from "../scripts/cartContext";
+import { CartContext } from "../scripts/CartProvider";
 
 export default function Inventory(props) {
   const { currencyConverter, inventory, localCurrency } = props;
