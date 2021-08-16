@@ -20,7 +20,7 @@ While this definition and others can bring clarity to the elements that make up 
 
 This project is a guide that attempts to analyze 3 "ilities" of software architecture (readability, reusability, and refactorability), and show how we can form better code by thinking through these concepts hierarchically. This project is for any developer of any skill level, but if you are just starting out you will find more value in this than a seasoned practitioner.
 
-The code we will be looking at is a very simple shopping cart application written in JavaScript, which makes use of two major libraries in the ecosystem: React and Redux (plan to port it to Context API). JavaScript and the aforementioned tools are by no means the only way to structure any particular application. They happen to be used by a lot of newcomers to the industry, and by many veterans as well, so their frequency of usage makes them a wonderful common language by which to discuss code quality. We will be developing our application one piece at a time and looking at Bad vs. Good versions at each step in 3 R hierarchy. You can find all the code in the `src` directory, and instructions about how to build this and develop on it are at the bottom of this README.
+The code we will be looking at is a very simple shopping cart application written in JavaScript, which makes use of two major libraries in the ecosystem: React and Context API. JavaScript and the aforementioned tools are by no means the only way to structure any particular application. They happen to be used by a lot of newcomers to the industry, and by many veterans as well, so their frequency of usage makes them a wonderful common language by which to discuss code quality. We will be developing our application one piece at a time and looking at Bad vs. Good versions at each step in 3 R hierarchy. You can find all the code in the `src` directory, and instructions about how to build this and develop on it are at the bottom of this README.
 
 One more thing to reiterate: this project isn't the only way to look at software, and it certainly can't give you an architecture, but it's something that can hopefully guide your thinking, as it has guided mine.
 
@@ -116,7 +116,7 @@ Now, it's time for a bit of caution. Before diving in and making everything reus
 
 ---
 
-## 3. Refactorability (imcomplete...)
+## 3. Refactorability
 
 ### About
 
@@ -133,7 +133,7 @@ Refactorability is about the system as a whole. It's about how your reusable mod
 We are using JavaScript, and not a typed alternative such as TypeScript, so we won't be able to see how static types can help. Suffice it to say, when your code has types, such as you see below, you know that nobody can pass incorrect values to your code, which limits the number of possible errors your app can experience:
 
 ```javascript
-// TypeScript
+// TypeScript code
 // We can't get passed arrays, strings, objects, or any type other than a number
 function add(a: number, b: number) {
   return a + b;
@@ -187,18 +187,20 @@ Let's see what this more refactorable code looks like:
 
 **Project structure:**
 
-- `src/3-refactorable/good/containers/inventory.js`
-- `src/3-refactorable/good/containers/cart.js`
-- `src/3-refactorable/good/actions/index.js`
-- `src/3-refactorable/good/reducers/cart.js`
+- `src/3-refactorable/good/components/Cart.jsx`
+- `src/3-refactorable/good/components/CurrencySelector.jsx`
+- `src/3-refactorable/good/components/Inventory.jsx`
+- `src/3-refactorable/good/scripts/currency-converter.js`
+- `src/3-refactorable/good/state/cart-reducer.js`
+- `src/3-refactorable/good/state/CartProvider.jsx`
 
-This improved code centralizes our side effects to an `action` function which takes a `productId` in and passes it to our `reducer` which creates an entirely brand-new cart with this product added to it. This new cart is placed in our `store`, and once that happens all of our components which derive their state from particular pieces of the `store` will be notified by `react-redux` of the new data, and they will update their state. React will intelligently re-render each updated component, and that's it!
+This improved code centralizes our side effects to an `switch` function which takes a `action type` in and passes it to our `reducer` which creates an entirely brand-new cart with this product added to it. This new cart is placed in our `cart` located in `state/CartProvider.jsx`, and once that happens all of our components which derive their state from particular pieces of this `provider` will be notified by of the new data, and they will update their state. React will intelligently re-render each updated component, and that's it!
 
-This flow makes it possible to be sure that the state of your application can only be updated in one way, and that's through the _action_ -> _reducer_ -> _store_ -> _component_ pipeline. There's no global state to modify, no messages to pass and keep track of, and no uncontrolled side effects that our modules can produce. The best part is, we can keep track of the entire state of our application so debugging and QA can become much easier, because we have an exact snapshot in time of our entire application.
+This flow makes it possible to be sure that the state of your application can only be updated in one way, and that's through the _action type_ -> _reducer_ -> _provider_ -> _component_ pipeline. There's no global state to modify, no messages to pass and keep track of, and no uncontrolled side effects that our modules can produce. The best part is, we can keep track of the entire state of our application so debugging and QA can become much easier, because we have an exact snapshot in time of our entire application.
 
-One caveat to note: you might not need Redux in this project's example application, but if we were to expand this code it would become easier to use Redux as the state management solution instead of putting everything in the top-level controlling file `App.jsx`. We could have isolated the state of our app there and passed the appropriate data-modifying action functions down through each module. The issue with that is that at scale, we would have a lot of actions to pass down and a lot of data that would live in one massive `App.jsx`. By committing to a proper centralization of state early, we won't need to change much as our application growths.
+One caveat to note: you might not need Context API in this project's example application, but if we were to expand this code it would become easier to use it as the state management solution instead of putting everything in the top-level controlling file `App.jsx`. We could have isolated the state of our app there and passed the appropriate data-modifying action functions down through each module. The issue with that is that at scale, we would have a lot of actions to pass down and a lot of data that would live in one massive `App.jsx`. By committing to a proper centralization of state early, we won't need to change much as our application growths.
 
-#### 3. Test
+#### 3. Test (Pending for when we reach this chapter)
 
 The last thing we need to look at is tests. Tests give us confidence that we can change a module and it will still do what it was intended to do. We will look at the tests for the Cart and Inventory components:
 
