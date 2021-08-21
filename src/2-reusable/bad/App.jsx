@@ -61,7 +61,7 @@ export default function Inventory() {
     <div>
       <h2>2 Bad</h2>
 
-      {/* CurrencySelector */}
+      {/* Currency selector */}
       <label>
         Currency:
         <select
