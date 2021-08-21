@@ -227,7 +227,7 @@ Thank you for reading this! If you wish to expand on this project or contribute,
 
 ```
 npm install
-npm run start
+npm start
 ```
 
 Open a browser and see the app running at `http://localhost:3000/`
