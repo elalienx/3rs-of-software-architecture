@@ -179,7 +179,7 @@ The two main issues with the code above are:
 
 Even though our modules are reusable and readable, by writing to global variables we are making our overall system very brittle. Any third-party library that we bring in could overwrite our `window.cart` with something else and break our app. Furthermore, any module we write can access it and modify it without any safeguards or centralized way of updating.
 
-You might be saying, "Yeah, yeah I would never structure my app like this in the first place." That's great! Remember though, that even though this is exaggerated, the point is that the way the cart is updated and read is not centralized. If instead of using global variables and `setInterval` you were using a [message passing](https://en.wikipedia.org/wiki/Message_passing) module, that could also make your code hard to understand and refactor at scale because it could be hard to isolate state and figure out how one module might affect another.
+You might be saying, _"Yeah, yeah I would never structure my app like this in the first place."_ That's great! Remember though, that even though this is exaggerated, the point is that the way the cart is updated and read is not centralized. If instead of using global variables and `setInterval` you were using a [message passing](https://en.wikipedia.org/wiki/Message_passing) module, that could also make your code hard to understand and refactor at scale because it could be hard to isolate state and figure out how one module might affect another.
 
 We will centralize our state management using Context API. If you haven't used Conext API before, [check out the official documentation](https://reactjs.org/docs/context.html).
 
