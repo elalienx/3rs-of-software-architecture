@@ -146,7 +146,7 @@ You might be wondering, what does it mean to isolate your side effects? And you 
 
 #### 2. Isolated side effects
 
-A _side effect_ is when your function or module modifies data outside the scope of itself. If you are writing data to a disk, changing a global variable, or even printing something to the terminal, you have a side effect. Now, if your program has no side effects at all then it's a black box. Programs are instructions that a computer executes which take data in and produce data out. If there's no data going out, then a program isn't useful. But, for a program to produce data it has to modify something in the world outside itself. For this reason we need side effects, but we also need to isolate them by placing them in a separate place, safe from the rest of the code.
+A _side effect_ is when your function or module modifies data outside the scope of itself. If you are writing data to a disk, changing a global variable, or even printing something to the terminal, you have a side effect. Now, if your program has no side effects at all then it's a black box. Programs are instructions that a computer executes which take data in and produce data out. If there's no data going out, then a program isn't useful. But, for a program to produce data it has to modify something in the world outside itself. For this reason we need side effects, but we also need to isolate them, by moving them in a separate place, safe from the rest of the code.
 
 **Why should we isolate side effects?**
 
