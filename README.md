@@ -191,8 +191,8 @@ Let's see what this more refactorable code looks like:
 - `src/3-refactorable/good/components/CurrencySelector.jsx`
 - `src/3-refactorable/good/components/Inventory.jsx`
 - `src/3-refactorable/good/scripts/currency-converter.js`
-- `src/3-refactorable/good/state/cart-reducer.js` (new) ([right click to open](src/3-refactorable/state/cart-reducer.js))
-- `src/3-refactorable/good/state/CartProvider.jsx` (new) ([right click to open](src/3-refactorable/state/CartProvider.jsx))
+- `src/3-refactorable/good/state/cart-reducer.js` (new) ([right click to open](src/3-refactorable/good/state/cart-reducer.js))
+- `src/3-refactorable/good/state/CartProvider.jsx` (new) ([right click to open](src/3-refactorable/good/state/CartProvider.jsx))
 
 This improved code centralizes our side effects to an `switch` function which takes a `action type` in and passes it to our `reducer` which creates an entirely brand-new cart with this product added to it. This new cart is placed in our `cart` located in `state/CartProvider.jsx`, and once that happens all of our components which derive their state from particular pieces of this `provider` will be notified by of the new data, and they will update their state. React will intelligently re-render each updated component, and that's it!
 
