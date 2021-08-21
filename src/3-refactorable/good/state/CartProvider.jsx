@@ -24,7 +24,7 @@ export function CartProvider(props) {
 export function useCart() {
   const context = useContext(CartContext);
 
-  if (!context) throw new Error("useList must be used within a <ListProvider>");
+  if (!context) throw new Error("useCart must be used within a <CartProvider>");
 
   return context;
 }
