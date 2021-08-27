@@ -2,7 +2,7 @@ Original authors: [Ryan McDermott](https://github.com/ryanmcdermott) and [Burak 
 
 # 3 Rs of Software Architecture
 
-![software architecture pyramid](public/pyramid.png)
+![software architecture pyramid](public/pyramid-2x.png)
 
 ## Introduction
 
