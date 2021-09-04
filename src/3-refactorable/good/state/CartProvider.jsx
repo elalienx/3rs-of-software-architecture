@@ -2,21 +2,18 @@
 import React, { useContext, useReducer } from "react";
 
 // Project files
-import CartReducer from "./cart-reducer";
+import cartReducer from "./cart-reducer";
 
 // Properties
-const CartContext = React.createContext(null);
+const CartContext = React.createContext(null); // can be renamed to Context REFACTOR
 
-export function CartProvider(props) {
+export function CartProvider({ children }) {
   // Global state
-  const [cart, dispatch] = useReducer(CartReducer, []);
-
-  // Properties
-  const contextValue = { cart, dispatch };
+  const [cart, dispatch] = useReducer(cartReducer, []);
 
   return (
-    <CartContext.Provider value={contextValue}>
-      {props.children}
+    <CartContext.Provider value={(cart, dispatch)}>
+      {children}
     </CartContext.Provider>
   );
 }
