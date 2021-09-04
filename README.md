@@ -206,10 +206,12 @@ The last thing we need to look at is tests. Tests give us confidence that we can
 
 **Testing files:**
 
-- `src/test/cart.test.js`
-- `src/test/inventory.test.js`
+- `src/3-refactorable/good/components/Cart.test.jsx`
+- `src/3-refactorable/good/components/CurrencySelector.test.jsx`
+- `src/3-refactorable/good/components/Inventory.test.jsx`
+- `src/3-refactorable/good/scripts/currency-converter.test.js`
 
-These tests ensure that the Cart and Inventory components:
+These tests ensure that the Cart, CurrencySelector and Inventory components:
 
 - Show the data they are supposed to
 - Maintain a consistent API
