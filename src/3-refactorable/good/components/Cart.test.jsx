@@ -5,15 +5,15 @@ import "@testing-library/jest-dom";
 
 // Project files
 import Cart from "./cart";
-import { CartProvider, initialState } from "../state/CartProvider";
+import { CartProvider } from "../state/CartProvider";
 
 const localCurrency = "usd";
 const inventory = [
   {
     id: 0,
     product: "Flashlight",
-    img: "/flashlight.jpg",
-    desc: "A really great flashlight",
+    image: "/flashlight.jpg",
+    description: "A really great flashlight",
     price: 100,
     currency: "usd",
   },
@@ -43,12 +43,13 @@ test("should render Cart without crashing", () => {
 
 test("should show all cart data in cart table", () => {
   // Arrange
+  const cart = [1];
   currencyConverter.convert = function () {
-    return "$" + inventory[1].price;
+    return "$" + inventory[0].price;
   };
 
   render(
-    <CartProvider>
+    <CartProvider initialState={cart}>
       <Cart
         currencyConverter={currencyConverter}
         inventory={inventory}
@@ -62,6 +63,6 @@ test("should show all cart data in cart table", () => {
   const priceElement = screen.getByText("$100");
 
   // Asert
-  expect(product).toBeInTheDocument();
-  expect(price).toBeInTheDocument();
+  expect(productElement).toBeInTheDocument();
+  expect(priceElement).toBeInTheDocument();
 });

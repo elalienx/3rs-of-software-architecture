@@ -2,24 +2,23 @@
 import React, { useContext, useReducer } from "react";
 
 // Project files
-import cartReducer from "./cart-reducer";
+import CartReducer from "./cart-reducer";
 
 // Properties
-const CartContext = React.createContext(null); // can be renamed to Context REFACTOR
+const Context = React.createContext(null);
 
-export function CartProvider({ children }) {
+export function CartProvider({ children, initialState = [] }) {
   // Global state
-  const [cart, dispatch] = useReducer(cartReducer, []);
+  const [cart, dispatch] = useReducer(CartReducer, initialState);
 
-  return (
-    <CartContext.Provider value={(cart, dispatch)}>
-      {children}
-    </CartContext.Provider>
-  );
+  // Properties
+  const contextValue = { cart, dispatch };
+
+  return <Context.Provider value={contextValue}>{children}</Context.Provider>;
 }
 
 export function useCart() {
-  const context = useContext(CartContext);
+  const context = useContext(Context);
 
   if (!context) throw new Error("useCart must be used within a <CartProvider>");
 
