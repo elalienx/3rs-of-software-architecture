@@ -13,6 +13,7 @@ export default function CurrencySelector({ localCurrency, setLocalCurrency }) {
     <label>
       Currency:
       <select
+        data-testid="select"
         className="u-full-width"
         onChange={onSelectCurrency}
         value={localCurrency}

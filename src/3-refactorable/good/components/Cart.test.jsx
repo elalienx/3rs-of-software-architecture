@@ -4,9 +4,10 @@ import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
 // Project files
-import Cart from "./cart";
 import { CartProvider } from "../state/CartProvider";
+import Cart from "./cart";
 
+// Initial state
 const localCurrency = "usd";
 const inventory = [
   {
