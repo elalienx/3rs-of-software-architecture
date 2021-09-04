@@ -8,8 +8,6 @@ export default function Cart({ currencyConverter, inventory, localCurrency }) {
   // Global state
   const { cart, dispatch } = useCart();
 
-  console.log("Cart.jsx cart", cart);
-
   // Components
   const TableRows = cart.map((itemId, index) => (
     <tr key={index}>
