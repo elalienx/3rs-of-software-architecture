@@ -10,6 +10,16 @@ export default function Inventory(props) {
   // Global state
   const { dispatch } = useCart();
 
+  // Methods
+  function temporalMethod(id) {
+    console.log("temp memthod");
+    dispatch({ type: "add", itemId: id });
+  }
+
+  function onSelectCurrency(event) {
+    console.log("foo");
+  }
+
   return (
     <table style={{ width: "100%" }}>
       <tbody>
@@ -36,11 +46,7 @@ export default function Inventory(props) {
               )}
             </td>
             <td>
-              <button
-                onClick={() => dispatch({ type: "add", itemId: item.id })}
-              >
-                Add to Cart
-              </button>
+              <button onClick={onSelectCurrency}>Add to Cart</button>
             </td>
           </tr>
         ))}

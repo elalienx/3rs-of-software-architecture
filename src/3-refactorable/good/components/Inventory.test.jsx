@@ -9,6 +9,7 @@ import Inventory from "./Inventory";
 
 // Initial state
 const localCurrency = "usd";
+const setLocalCurrency = jest.fn();
 const inventory = [
   {
     id: 0,
@@ -19,10 +20,6 @@ const inventory = [
     currency: "usd",
   },
 ];
-const dispatch = jest.fn();
-useDispatch.mockReturnValue(jest.fn());
-
-const changeCurrency = jest.fn();
 const currencyConverter = {
   convert: jest.fn(),
 };
@@ -67,9 +64,9 @@ test("should have a working add to cart button", () => {
   );
 
   // Act
-  const buttonElement = screen.getByText(/add to cart/i);
+  const buttonElement = screen.getByText("Add to Cart");
   fireEvent.click(buttonElement);
 
   // Assert
-  expect(dispatch).toHaveBeenCalled();
+  expect(setLocalCurrency).toHaveBeenCalled();
 });
