@@ -1,4 +1,5 @@
 export default function cartReducer(state, action) {
+  console.log("cartReducer()");
   switch (action.type) {
     case "add":
       return add(state, action);

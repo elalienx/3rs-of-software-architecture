@@ -5,11 +5,13 @@ import "@testing-library/jest-dom";
 
 // Project files
 import { CartProvider } from "../state/CartProvider";
+import cartReducer from "../state/cart-reducer";
+jest.mock("../state/cart-reducer");
+
 import Inventory from "./Inventory";
 
 // Initial state
 const localCurrency = "usd";
-const setLocalCurrency = jest.fn();
 const inventory = [
   {
     id: 0,
@@ -67,6 +69,5 @@ test("should have a working add to cart button", () => {
   const buttonElement = screen.getByText("Add to Cart");
   fireEvent.click(buttonElement);
 
-  // Assert
-  expect(setLocalCurrency).toHaveBeenCalled();
+  expect(cartReducer).toBeCalled();
 });
