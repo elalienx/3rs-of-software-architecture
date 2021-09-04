@@ -13,7 +13,7 @@ export default function App() {
   return (
     <div className="App">
       {/* --- Category: Refadable good and bad */}
-      <ReadableBad />
+      {/* <ReadableBad /> */}
       {/* <ReadableGood /> */}
 
       {/* --- Category: Refadable good and bad */}
@@ -22,7 +22,7 @@ export default function App() {
 
       {/* --- Category: Refactorable good and bad */}
       {/* <RefactorableBad/> */}
-      {/* <RefactorableGood/> */}
+      <RefactorableGood />
     </div>
   );
 }
