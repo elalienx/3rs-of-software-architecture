@@ -200,7 +200,7 @@ This flow makes it possible to be sure that the state of your application can on
 
 One caveat to note: you might not need Context API in this project's example application, but if we were to expand this code it would become easier to use it as the state management solution instead of putting everything in the top-level controlling file `App.jsx`. We could have isolated the state of our app there and passed the appropriate data-modifying action functions down through each module. The issue with that is that at scale, we would have a lot of actions to pass down and a lot of data that would live in one massive `App.jsx`. By committing to a proper centralization of state early, we won't need to change much as our application growths.
 
-#### 3. Test (Pending for when we reach this chapter)
+#### 3. Test
 
 The last thing we need to look at is tests. Tests give us confidence that we can change a module and it will still do what it was intended to do. We will look at the tests for the Cart and Inventory components:
 
