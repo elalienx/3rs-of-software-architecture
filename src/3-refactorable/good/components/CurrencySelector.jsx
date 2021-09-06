@@ -2,20 +2,13 @@
 import PropTypes from "prop-types";
 
 export default function CurrencySelector({ localCurrency, setLocalCurrency }) {
-  // Methods
-  function onSelectCurrency(event) {
-    const currency = event.target.value;
-
-    setLocalCurrency(currency);
-  }
-
   return (
     <label>
       Currency:
       <select
         data-testid="select"
         className="u-full-width"
-        onChange={onSelectCurrency}
+        onChange={(event) => setLocalCurrency(event.target.value)}
         value={localCurrency}
       >
         <option value="usd">USD</option>

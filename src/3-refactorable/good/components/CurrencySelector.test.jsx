@@ -26,7 +26,7 @@ test("should render CurrencySelector without crashing", () => {
   expect(labelElement).toBeInTheDocument();
 });
 
-test("should have a working add to cart button", () => {
+test("should change the option", () => {
   // Arrange
   render(
     <CurrencySelector
