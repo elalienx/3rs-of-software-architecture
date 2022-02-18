@@ -8,12 +8,12 @@ import RefactorableGood from "./3-refactorable/good/App";
 export default function App() {
   /**
    * Instructions:
-   * Comment all components and only leave the one you want to view.
+   * Comment out all components and only leave the one you want to view.
    */
   return (
     <div className="App">
       {/* --- Category: Refadable good and bad */}
-      {/* <ReadableBad /> */}
+      <ReadableBad />
       {/* <ReadableGood /> */}
 
       {/* --- Category: Refadable good and bad */}
@@ -22,7 +22,7 @@ export default function App() {
 
       {/* --- Category: Refactorable good and bad */}
       {/* <RefactorableBad/> */}
-      <RefactorableGood />
+      {/* <RefactorableGood /> */}
     </div>
   );
 }
