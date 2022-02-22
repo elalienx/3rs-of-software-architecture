@@ -36,9 +36,3 @@ export default function Inventory(props) {
     </div>
   );
 }
-
-Inventory.propTypes = {
-  currencyConverter: PropTypes.object.isRequired,
-  inventory: PropTypes.array.isRequired,
-  localCurrency: PropTypes.string.isRequired,
-};

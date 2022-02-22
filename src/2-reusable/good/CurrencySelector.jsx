@@ -24,8 +24,3 @@ export default function CurrencySelector({ localCurrency, setLocalCurrency }) {
     </label>
   );
 }
-
-CurrencySelector.propTypes = {
-  localCurrency: PropTypes.string.isRequired,
-  setLocalCurrency: PropTypes.func.isRequired,
-};
