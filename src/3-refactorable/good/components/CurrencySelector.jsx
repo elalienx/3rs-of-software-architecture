@@ -7,7 +7,6 @@ export default function CurrencySelector({ localCurrency, setLocalCurrency }) {
       Currency:
       <select
         data-testid="select"
-        className="u-full-width"
         onChange={(event) => setLocalCurrency(event.target.value)}
         value={localCurrency}
       >
