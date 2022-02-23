@@ -2,9 +2,7 @@
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
-export default function Cart(props) {
-  const { currencyConverter, inventory, localCurrency } = props;
-
+export default function Cart({ currencyConverter, inventory, localCurrency }) {
   // Local state
   const [cart, setCart] = useState([]);
 

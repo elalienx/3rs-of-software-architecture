@@ -9,10 +9,8 @@ import inventory from "./data/inventory.json";
 import CurrencyConverter from "./scripts/currency-converter";
 
 export default function Project() {
-  // Global state
-  window.cart = []; // Global Cart, BAD!
-
   // Local state
+  const [cart, setCart] = useState([]); // state acting as GLOBAL state (bad)
   const [localCurrency, setLocalCurrency] = useState("usd");
 
   // Most likely we would fetch this from an external source if this were a real app
@@ -32,11 +30,13 @@ export default function Project() {
         setLocalCurrency={setLocalCurrency}
       />
       <InventoryTable
+        cartState={[cart, setCart]}
         currencyConverter={new CurrencyConverter(currencyConversions)}
         inventory={inventory}
         localCurrency={localCurrency}
       />
       <Cart
+        cartState={[cart, setCart]}
         currencyConverter={new CurrencyConverter(currencyConversions)}
         inventory={inventory}
         localCurrency={localCurrency}
