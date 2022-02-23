@@ -17,5 +17,5 @@ export default function Components({ index }) {
     <RefactorableGood />,
   ];
 
-  return <>{list[index]}</>;
+  return <div>{list[index]}</div>;
 }
