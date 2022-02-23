@@ -33,7 +33,7 @@ export default function InventoryTable({
 
   return (
     <table style={{ width: "100%" }}>
-      <tbody>
+      <thead>
         <tr>
           <th>Product</th>
           <th>Image</th>
@@ -41,8 +41,8 @@ export default function InventoryTable({
           <th>Price</th>
           <th>Cart</th>
         </tr>
-        {InventoryRows}
-      </tbody>
+      </thead>
+      <tbody>{InventoryRows}</tbody>
     </table>
   );
 }
