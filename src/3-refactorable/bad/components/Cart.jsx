@@ -33,7 +33,7 @@ export default function Cart({ currencyConverter, inventory, localCurrency }) {
 
   return (
     <div>
-      <h2>Cart</h2>
+      <h2>Your Shopping Cart</h2>
       {cart.length === 0 && <p>Nothing to show</p>}
       {cart.length > 0 && (
         <table style={{ width: "100%" }}>
