@@ -9,7 +9,7 @@ export default function Cart({ currencyConverter, inventory, localCurrency }) {
   const { cart, dispatch } = useCart();
 
   // Components
-  const TableRows = cart.map((itemId, index) => (
+  const CartRows = cart.map((itemId, index) => (
     <tr key={index}>
       <td>{inventory[itemId - 1].product}</td>
       <td>
@@ -34,7 +34,7 @@ export default function Cart({ currencyConverter, inventory, localCurrency }) {
               <th>Price</th>
             </tr>
           </thead>
-          <tbody>{TableRows}</tbody>
+          <tbody>{CartRows}</tbody>
         </table>
       )}
       <button onClick={() => dispatch({ type: "empty" })}>Empty cart</button>
