@@ -2,14 +2,16 @@
 import PropTypes from "prop-types";
 
 export default function InventoryTable({
+  cartState,
   currencyConverter,
   inventory,
   localCurrency,
 }) {
+  const [cart, setCart] = cartState;
+
   // Methods
   function onAddToCart(itemId) {
-    // Mutating an external state, BAD!
-    window.cart.push(itemId);
+    setCart([...cart, itemId]);
   }
 
   // Components

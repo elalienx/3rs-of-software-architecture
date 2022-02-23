@@ -2,20 +2,18 @@
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
-export default function Cart({ currencyConverter, inventory, localCurrency }) {
-  // Local state
-  const [cart, setCart] = useState([]);
+export default function Cart({
+  cartState,
+  currencyConverter,
+  inventory,
+  localCurrency,
+}) {
+  const [cart, setCart] = cartState;
 
-  // Method
+  // Methods
   function onEmptyCart() {
-    window.cart = [];
-
-    setCart([...window.cart]);
+    setCart([]);
   }
-
-  useEffect(() => {
-    setInterval(() => setCart([...window.cart]), 1000); // Repeatedly sync global cart to local cart, BAD!
-  }, [setCart]);
 
   return (
     <div>
