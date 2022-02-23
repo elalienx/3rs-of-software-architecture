@@ -1,9 +1,8 @@
-// NPM Packages
-import PropTypes from "prop-types";
-
-export default function Inventory(props) {
-  const { currencyConverter, inventory, localCurrency } = props;
-
+export default function Inventory({
+  currencyConverter,
+  inventory,
+  localCurrency,
+}) {
   return (
     <div>
       <table style={{ width: "100%" }}>

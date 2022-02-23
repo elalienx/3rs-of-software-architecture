@@ -1,6 +1,3 @@
-// NPM Packages
-import PropTypes from "prop-types";
-
 export default function CurrencySelector({ localCurrency, setLocalCurrency }) {
   // Methods
   function onSelectCurrency(event) {

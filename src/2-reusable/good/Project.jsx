@@ -2,9 +2,9 @@
 import { useState } from "react";
 
 // Project files
-import CurrencyConverter from "./scripts/currency-converter";
 import CurrencySelector from "./components/CurrencySelector";
-import Inventory from "./Inventory";
+import Inventory from "./components/Inventory";
+import CurrencyConverter from "./scripts/currency-converter";
 
 export default function Project() {
   // Local state
