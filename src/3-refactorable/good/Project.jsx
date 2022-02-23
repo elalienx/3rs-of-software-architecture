@@ -5,7 +5,7 @@ import { useState } from "react";
 import Cart from "./components/Cart";
 import CurrencySelector from "./components/CurrencySelector";
 import InventoryTable from "./components/InventoryTable";
-import inventory from "./components/inventory";
+import inventory from "./data/inventory";
 import CurrencyConverter from "./scripts/currency-converter";
 import { CartProvider } from "./state/CartProvider";
 

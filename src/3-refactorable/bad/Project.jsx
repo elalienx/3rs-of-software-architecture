@@ -26,7 +26,7 @@ export default function Project() {
 
   return (
     <div>
-      <h2>3 Bad</h2>
+      <h2>3 Refactorability Bad</h2>
       <CurrencySelector
         localCurrency={localCurrency}
         setLocalCurrency={setLocalCurrency}
