@@ -8,7 +8,7 @@ import { CartProvider } from "../state/CartProvider";
 import cartReducer from "../state/cart-reducer";
 jest.mock("../state/cart-reducer");
 
-import Inventory from "./Inventory";
+import InventoryTable from "./InventoryTable";
 
 // Initial state
 const localCurrency = "usd";
@@ -30,7 +30,7 @@ test("should render Inventory without crashing", () => {
   // Arrange
   render(
     <CartProvider>
-      <Inventory
+      <InventoryTable
         currencyConverter={currencyConverter}
         inventory={inventory}
         localCurrency={localCurrency}

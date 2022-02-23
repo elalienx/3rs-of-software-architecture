@@ -49,9 +49,3 @@ export default function Cart(props) {
     </div>
   );
 }
-
-Cart.propTypes = {
-  currencyConverter: PropTypes.object.isRequired,
-  inventory: PropTypes.array.isRequired,
-  localCurrency: PropTypes.string.isRequired,
-};

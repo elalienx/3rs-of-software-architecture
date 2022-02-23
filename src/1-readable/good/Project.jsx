@@ -27,9 +27,23 @@ export default function Project() {
     },
   ];
 
+  // Components (to remove the nesting)
+  const InventoryRows = inventory.map((item) => {
+    return (
+      <tr key={item.id}>
+        <td>{item.product}</td>
+        <td>
+          <img src={item.image} alt="" />
+        </td>
+        <td>{item.description}</td>
+        <td>{item.price}</td>
+      </tr>
+    );
+  });
+
   return (
-    <>
-      <h2>1 Good</h2>
+    <div>
+      <h2>1 Redable Good</h2>
       <p>Global currency: {localCurrency}</p>
 
       <table style={{ width: "100%" }}>
@@ -40,20 +54,9 @@ export default function Project() {
             <th>Description</th>
             <th>Price</th>
           </tr>
-          {inventory.map((item) => {
-            return (
-              <tr key={item.id}>
-                <td>{item.product}</td>
-                <td>
-                  <img src={item.image} alt="" />
-                </td>
-                <td>{item.description}</td>
-                <td>{item.price}</td>
-              </tr>
-            );
-          })}
+          {InventoryRows}
         </tbody>
       </table>
-    </>
+    </div>
   );
 }

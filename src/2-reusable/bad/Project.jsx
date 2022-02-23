@@ -57,9 +57,21 @@ export default function Project() {
     return currencySymbols[toCurrency] + convertedCurrency;
   }
 
+  // Components
+  const InventoryRows = inventory.map((item) => (
+    <tr key={item.id}>
+      <td>{item.product}</td>
+      <td>
+        <img src={item.image} alt="" />
+      </td>
+      <td>{item.description}</td>
+      <td>{convertCurrency(item.price, item.currency, localCurrency)}</td>
+    </tr>
+  ));
+
   return (
     <div>
-      <h2>2 Bad</h2>
+      <h2>2 Reusable Bad</h2>
 
       {/* Currency selector */}
       <label>
@@ -80,18 +92,7 @@ export default function Project() {
             <th>Description</th>
             <th>Price</th>
           </tr>
-          {inventory.map((item) => (
-            <tr key={item.id}>
-              <td>{item.product}</td>
-              <td>
-                <img src={item.image} alt="" />
-              </td>
-              <td>{item.description}</td>
-              <td>
-                {convertCurrency(item.price, item.currency, localCurrency)}
-              </td>
-            </tr>
-          ))}
+          {InventoryRows}
         </tbody>
       </table>
     </div>

@@ -35,8 +35,8 @@ function Pr(){
   ]
 
   return (
-    <>
-    <h2>1 Bad</h2>
+    <div>
+    <h2>1 Readable Bad</h2>
     <p>Global currency: {c}</p>
 
     <table style={{width: '100%'}}>
@@ -81,7 +81,7 @@ function Pr(){
       })}
   </tbody>
   </table>
-  </>
+  </div>
   );
 }
 

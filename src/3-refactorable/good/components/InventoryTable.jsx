@@ -1,14 +1,14 @@
 // NPM Packages
 import PropTypes from "prop-types";
 
-export default function Inventory(props) {
+// Project files
+import { useCart } from "../state/CartProvider";
+
+export default function InventoryTable(props) {
   const { currencyConverter, inventory, localCurrency } = props;
 
-  // Methods
-  function onAddToCart(itemId) {
-    // Mutating an external state, BAD!
-    window.cart.push(itemId);
-  }
+  // Global state
+  const { dispatch } = useCart();
 
   return (
     <table style={{ width: "100%" }}>
@@ -36,7 +36,11 @@ export default function Inventory(props) {
               )}
             </td>
             <td>
-              <button onClick={() => onAddToCart(item.id)}>Add to Cart</button>
+              <button
+                onClick={() => dispatch({ type: "add", itemId: item.id })}
+              >
+                Add to Cart
+              </button>
             </td>
           </tr>
         ))}
