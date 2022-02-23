@@ -22,7 +22,7 @@ export default function Project() {
 
   return (
     <div>
-      <h2>2 Good</h2>
+      <h2>2 Reusable Good</h2>
       <CurrencySelector
         localCurrency={localCurrency}
         setLocalCurrency={setLocalCurrency}
