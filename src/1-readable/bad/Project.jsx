@@ -85,4 +85,4 @@ function Pr(){
   );
 }
 
-export default Inv;
+export default Pr;
