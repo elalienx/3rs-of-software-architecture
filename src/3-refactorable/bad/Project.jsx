@@ -2,16 +2,20 @@
 import { useState } from "react";
 
 // Project files
-import Cart from "./components/Cart";
-import CurrencySelector from "./components/CurrencySelector";
-import Inventory from "./components/Inventory";
-import { CartProvider } from "./state/CartProvider";
 import CurrencyConverter from "./scripts/currency-converter";
+import Cart from "./components/Cart";
+import CurrencySelector from "./CurrencySelector";
+import Inventory from "./Inventory";
 
-export default function App() {
+export default function Project() {
+  // Global state
+  // Global Cart, BAD!
+  window.cart = [];
+
   // Local state
   const [localCurrency, setLocalCurrency] = useState("usd");
 
+  // Properties
   const inventory = [
     {
       id: 1,
@@ -48,24 +52,22 @@ export default function App() {
   };
 
   return (
-    <CartProvider>
-      <div>
-        <h2>3 Good</h2>
-        <CurrencySelector
-          localCurrency={localCurrency}
-          setLocalCurrency={setLocalCurrency}
-        />
-        <Inventory
-          currencyConverter={new CurrencyConverter(currencyConversions)}
-          inventory={inventory}
-          localCurrency={localCurrency}
-        />
-        <Cart
-          currencyConverter={new CurrencyConverter(currencyConversions)}
-          inventory={inventory}
-          localCurrency={localCurrency}
-        />
-      </div>
-    </CartProvider>
+    <div>
+      <h2>3 Bad</h2>
+      <CurrencySelector
+        localCurrency={localCurrency}
+        setLocalCurrency={setLocalCurrency}
+      />
+      <Inventory
+        currencyConverter={new CurrencyConverter(currencyConversions)}
+        inventory={inventory}
+        localCurrency={localCurrency}
+      />
+      <Cart
+        currencyConverter={new CurrencyConverter(currencyConversions)}
+        inventory={inventory}
+        localCurrency={localCurrency}
+      />
+    </div>
   );
 }

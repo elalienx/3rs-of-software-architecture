@@ -1,7 +1,7 @@
 // NPM packages
 import { useState } from "react";
 
-export default function Inventory() {
+export default function Project() {
   // Local state
   const [localCurrency, setLocalCurrency] = useState("usd");
 

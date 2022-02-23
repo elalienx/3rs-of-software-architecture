@@ -1,9 +1,9 @@
-import ReadableBad from "./1-readable/bad/App";
-import ReadableGood from "./1-readable/good/App";
-import ReusableBad from "./2-reusable/bad/App";
-import ReusableGood from "./2-reusable/good/App";
-import RefactorableBad from "./3-refactorable/bad/App";
-import RefactorableGood from "./3-refactorable/good/App";
+import ReadableBad from "./1-readable/bad/Project";
+import ReadableGood from "./1-readable/good/Project";
+import ReusableBad from "./2-reusable/bad/Project";
+import ReusableGood from "./2-reusable/good/Project";
+import RefactorableBad from "./3-refactorable/bad/Project";
+import RefactorableGood from "./3-refactorable/good/Project";
 
 export default function App() {
   /**
