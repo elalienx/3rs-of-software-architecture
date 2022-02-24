@@ -6,11 +6,11 @@ export default function InventoryTable({
   inventory,
   localCurrency,
 }) {
-  const { cart, setCart } = useCart();
+  const { addToCartById } = useCart();
 
   // Methods
   function onAddToCart(itemId) {
-    setCart([...cart, itemId]);
+    addToCartById(itemId);
   }
 
   // Components

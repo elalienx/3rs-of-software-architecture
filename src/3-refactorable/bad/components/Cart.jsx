@@ -7,11 +7,11 @@ export default function Cart({
   inventory,
   localCurrency,
 }) {
-  const { cart, setCart } = useCart();
+  const { cart, emptyCart } = useCart();
 
   // Methods
   function onEmptyCart() {
-    setCart([]);
+    emptyCart();
   }
 
   // Components

@@ -16,7 +16,16 @@ export function CartProvider({ children }) {
   const [cart, setCart] = useState([]);
 
   // Properties
-  const values = { cart, setCart };
+  const values = { cart, addToCartById, emptyCart };
+
+  // Methods
+  function addToCartById(id) {
+    setCart([...cart, id]);
+  }
+
+  function emptyCart() {
+    setCart([]);
+  }
 
   return <Context.Provider value={values}>{children}</Context.Provider>;
 }
