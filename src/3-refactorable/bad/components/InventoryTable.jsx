@@ -1,13 +1,12 @@
-// NPM Packages
-import PropTypes from "prop-types";
+// Project files
+import { useCart } from "../state/CartProvider";
 
 export default function InventoryTable({
-  cartState,
   currencyConverter,
   inventory,
   localCurrency,
 }) {
-  const [cart, setCart] = cartState;
+  const { cart, setCart } = useCart();
 
   // Methods
   function onAddToCart(itemId) {

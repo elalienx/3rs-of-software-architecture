@@ -1,10 +1,13 @@
+// Project files
+import { useCart } from "../state/CartProvider";
+
 export default function Cart({
   cartState,
   currencyConverter,
   inventory,
   localCurrency,
 }) {
-  const [cart, setCart] = cartState;
+  const { cart, setCart } = useCart();
 
   // Methods
   function onEmptyCart() {
