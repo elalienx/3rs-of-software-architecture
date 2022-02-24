@@ -1,12 +1,10 @@
+// NPM packages
+import PropTypes from "prop-types";
+
 // Project files
 import { useCart } from "../state/CartProvider";
 
-export default function Cart({
-  cartState,
-  currencyConverter,
-  inventory,
-  localCurrency,
-}) {
+export default function Cart({ currencyConverter, inventory, localCurrency }) {
   const { cart, emptyCart } = useCart();
 
   // Methods
@@ -47,3 +45,18 @@ export default function Cart({
     </div>
   );
 }
+
+Cart.propTypes = {
+  currencyConverter: PropTypes.object.isRequired, // Classes in JS are objects behind the scenes
+  inventory: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      product: PropTypes.string.isRequired,
+      image: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+      price: PropTypes.number.isRequired,
+      currency: PropTypes.string.isRequired,
+    })
+  ),
+  localCurrency: PropTypes.string.isRequired,
+};

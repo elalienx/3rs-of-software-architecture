@@ -1,3 +1,6 @@
+// NPM packages
+import PropTypes from "prop-types";
+
 export default function CurrencySelector({ localCurrency, setLocalCurrency }) {
   // Methods
   function onSelectCurrency(event) {
@@ -17,3 +20,8 @@ export default function CurrencySelector({ localCurrency, setLocalCurrency }) {
     </label>
   );
 }
+
+CurrencySelector.propTypes = {
+  localCurrency: PropTypes.string.isRequired,
+  setLocalCurrency: PropTypes.func.isRequired,
+};

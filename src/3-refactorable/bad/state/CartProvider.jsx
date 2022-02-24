@@ -34,7 +34,7 @@ export function CartProvider({ children }) {
 export function useCart() {
   const context = useContext(Context);
   const errorText =
-    "You cannot use useCart() before you put the <CartProvider/> inside the parent component";
+    "You cannot utilize the useCart() hook before you put the <CartProvider/> Context API inside the parent component";
 
   // Safeguard
   if (!context) throw new Error(errorText);
