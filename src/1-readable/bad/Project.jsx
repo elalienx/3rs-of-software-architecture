@@ -3,7 +3,7 @@
  * This file is exluded from Prettier on purpose to compare the lack of formatting.
  * To see the difference, create a new branch and remove Project.jsx from .prettierignore
  */
-
+   
 // Project
 function Pr(){
   const c = 'usd' // currency
