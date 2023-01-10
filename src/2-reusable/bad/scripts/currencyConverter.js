@@ -1,3 +1,4 @@
+// Note, in a real project this comes from an API
 const currencyConversions = {
   usd: {
     rupee: 66.78,

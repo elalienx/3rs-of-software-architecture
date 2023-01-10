@@ -1,5 +1,5 @@
 // NPM Packages
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // Project files
 import CurrencySelector from "./components/CurrencySelector";
@@ -19,6 +19,7 @@ export default function Project() {
       usd: 1,
     },
   };
+
 
   return (
     <div>

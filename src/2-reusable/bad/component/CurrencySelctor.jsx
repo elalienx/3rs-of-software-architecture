@@ -3,7 +3,9 @@ export default function CurrencySelector({ localCurrencyState }) {
 
   // Methods
   function onSelectCurrency(event) {
-    setLocalCurrency(event.target.value);
+    const newCurrency = event.target.value;
+
+    setLocalCurrency(newCurrency);
   }
 
   return (
