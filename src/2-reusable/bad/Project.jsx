@@ -14,7 +14,8 @@ export default function Project() {
     <div>
       <h2>2 Reusable Bad</h2>
       <CurrencySelector
-        localCurrencyState={[localCurrency, setLocalCurrency]}
+        localCurrency={localCurrency}
+        setLocalCurrency={setLocalCurrency}
       />
       <InventoryTable inventory={Inventory} localCurrency={localCurrency} />
     </div>
