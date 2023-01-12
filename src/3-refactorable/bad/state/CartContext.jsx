@@ -10,7 +10,16 @@ export function CartProvider({ children }) {
   const [cart, setCart] = useState([]);
 
   // Properties
-  const value = { cart, setCart };
+  const value = { cart, addToCart, emptyCart };
+
+  // Methods
+  function addToCart(newItem) {
+    setCart([...cart, newItem]);
+  }
+
+  function emptyCart() {
+    setCart([]);
+  }
 
   return <Context.Provider value={value}>{children}</Context.Provider>;
 }

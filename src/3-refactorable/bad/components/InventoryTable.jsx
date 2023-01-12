@@ -7,13 +7,7 @@ export default function InventoryTable({
   localCurrency,
 }) {
   // Global state
-  const { cart, setCart } = useCart();
-
-  // Methods
-  function onAddToCart(itemId) {
-    // refactor to remove setCart, otherwise the context api starts to have side effects
-    setCart([...cart, itemId]);
-  }
+  const { addToCart } = useCart();
 
   // Components
   const InventoryRows = inventory.map((item) => (
@@ -27,7 +21,7 @@ export default function InventoryTable({
         {currencyConverter.convert(item.price, item.currency, localCurrency)}
       </td>
       <td>
-        <button onClick={() => onAddToCart(item.id)}>Add to Cart</button>
+        <button onClick={() => addToCart(item.id)}>Add to Cart</button>
       </td>
     </tr>
   ));

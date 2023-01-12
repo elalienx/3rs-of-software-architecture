@@ -3,13 +3,7 @@ import { useCart } from "../state/CartContext";
 
 export default function Cart({ currencyConverter, inventory, localCurrency }) {
   // Global state
-  const { cart, setCart } = useCart();
-
-  // Methods
-  function onEmptyCart() {
-    // refactor to remove setCart, otherwise the context api starts to have side effects
-    setCart([]);
-  }
+  const { cart, emptyCart } = useCart();
 
   // Components
   const CartRows = cart.map((itemId, index) => (
@@ -40,7 +34,7 @@ export default function Cart({ currencyConverter, inventory, localCurrency }) {
           <tbody>{CartRows}</tbody>
         </table>
       )}
-      <button onClick={onEmptyCart}>Empty cart</button>
+      <button onClick={emptyCart}>Empty cart</button>
     </div>
   );
 }
