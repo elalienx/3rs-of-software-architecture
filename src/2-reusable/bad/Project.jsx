@@ -2,7 +2,7 @@
 import { useState } from "react";
 
 // Project file
-import CurrencySelector from "./component/CurrencySelctor";
+import CurrencySelector from "./component/CurrencySelector";
 import InventoryTable from "./component/InventoryTable";
 import Inventory from "./data/inventory.json";
 
@@ -14,7 +14,7 @@ export default function Project() {
     <div>
       <h2>2 Reusable Bad</h2>
       <CurrencySelector
-        localCurrency={localCurrency}
+        localCurrencyState={localCurrency}
         setLocalCurrency={setLocalCurrency}
       />
       <InventoryTable inventory={Inventory} localCurrency={localCurrency} />
