@@ -1,21 +1,15 @@
-// NPM Packages
-import { useEffect, useState } from "react";
-import PropTypes from "prop-types";
+// Project files
+import { useCart } from "../state/CartContext";
 
 export default function Cart({ currencyConverter, inventory, localCurrency }) {
-  // Local state
-  const [cart, setCart] = useState([]);
+  // Global state
+  const { cart, setCart } = useCart();
 
   // Methods
   function onEmptyCart() {
-    window.cart = [];
-
-    setCart([...window.cart]);
+    // refactor to remove setCart, otherwise the context api starts to have side effects
+    setCart([]);
   }
-
-  useEffect(() => {
-    setInterval(() => setCart([...window.cart]), 1000); // Repeatedly sync global cart to local cart, BAD!
-  }, [setCart]);
 
   // Components
   const CartRows = cart.map((itemId, index) => (

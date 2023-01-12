@@ -1,15 +1,18 @@
-// NPM Packages
-import PropTypes from "prop-types";
+// Project files
+import { useCart } from "../state/CartContext";
 
 export default function InventoryTable({
   currencyConverter,
   inventory,
   localCurrency,
 }) {
+  // Global state
+  const { cart, setCart } = useCart();
+
   // Methods
   function onAddToCart(itemId) {
-    // Mutating an external state, BAD!
-    window.cart.push(itemId);
+    // refactor to remove setCart, otherwise the context api starts to have side effects
+    setCart([...cart, itemId]);
   }
 
   // Components
