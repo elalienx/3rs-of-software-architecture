@@ -1,8 +1,4 @@
-export default function InventoryTable({
-  currencyConverter,
-  inventory,
-  localCurrency,
-}) {
+export default function InventoryTable({currencyConverter, inventory, localCurrency}) {
   // Components
   const InventoryRows = inventory.map((item) => (
     <tr key={item.id}>

@@ -1,5 +1,5 @@
 // NPM Packages
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // Project files
 import CurrencySelector from "./components/CurrencySelector";
@@ -10,15 +10,15 @@ import CurrencyConverter from "./scripts/currency-converter";
 export default function Project() {
   // Local state
   const [localCurrency, setLocalCurrency] = useState("usd");
+  const [exchangeRate, setExhangeRate] = useState({ usd: { usd: 1 } });
 
   // Most likely we would fetch this from an external source if this were a real app
-  const currencyConversions = {
-    usd: {
-      rupee: 66.78,
-      yuan: 6.87,
-      usd: 1,
-    },
-  };
+  useEffect(() => {
+    // to simulate getting the echange from a external API
+    const exchangeRate = { usd: { rupee: 66.78, yuan: 6.87, usd: 1 } };
+
+    setExhangeRate(exchangeRate);
+  }, []);
 
   return (
     <div>
@@ -28,7 +28,7 @@ export default function Project() {
         setLocalCurrency={setLocalCurrency}
       />
       <InventoryTable
-        currencyConverter={new CurrencyConverter(currencyConversions)}
+        currencyConverter={new CurrencyConverter(exchangeRate)}
         inventory={inventory}
         localCurrency={localCurrency}
       />

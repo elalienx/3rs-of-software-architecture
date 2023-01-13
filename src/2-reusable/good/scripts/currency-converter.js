@@ -1,7 +1,7 @@
 export default class CurrencyConverter {
-  constructor(currencyConversions) {
-    this.currencyConversions = currencyConversions;
-    this.currencySymbols = {
+  constructor(exchangeRate) {
+    this.exchangeRate = exchangeRate;
+    this.symbols = {
       usd: "$",
       rupee: "₹",
       yuan: "元",
@@ -9,8 +9,8 @@ export default class CurrencyConverter {
   }
 
   convert(amount, fromCurrency, toCurrency) {
-    const convertedCurreny =
-      amount * this.currencyConversions[fromCurrency][toCurrency];
-    return this.currencySymbols[toCurrency] + convertedCurreny;
+    const conversion = amount * this.exchangeRate[fromCurrency][toCurrency];
+
+    return this.symbols[toCurrency] + conversion;
   }
 }

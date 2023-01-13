@@ -1,9 +1,10 @@
 // NPM packages
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Project() {
   // Local state
   const [localCurrency, setLocalCurrency] = useState("usd");
+  const [exchangeRate, setExhangeRate] = useState({ usd: { usd: 1 } });
 
   // Properties
   const inventory = [
@@ -32,13 +33,6 @@ export default function Project() {
       currency: "usd",
     },
   ];
-  const currencyConversions = {
-    usd: {
-      rupee: 66.78,
-      yuan: 6.87,
-      usd: 1,
-    },
-  };
   const currencySymbols = {
     usd: "$",
     rupee: "₹",
@@ -46,13 +40,19 @@ export default function Project() {
   };
 
   // Methods
+  useEffect(() => {
+    // to simulate getting the echange from a external API
+    const exchangeRate = { usd: { rupee: 66.78, yuan: 6.87, usd: 1 } };
+
+    setExhangeRate(exchangeRate);
+  }, []);
+
   function onSelectCurrency(event) {
     setLocalCurrency(event.target.value);
   }
 
   function convertCurrency(amount, fromCurrency, toCurrency) {
-    const convertedCurrency =
-      amount * currencyConversions[fromCurrency][toCurrency];
+    const convertedCurrency = amount * exchangeRate[fromCurrency][toCurrency];
 
     return currencySymbols[toCurrency] + convertedCurrency;
   }
