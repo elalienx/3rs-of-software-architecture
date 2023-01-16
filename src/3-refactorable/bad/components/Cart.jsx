@@ -3,7 +3,7 @@ import { useCart } from "../state/CartContext";
 
 export default function Cart({ currencyConverter, inventory, localCurrency }) {
   // Global state
-  const { cart, emptyCart } = useCart();
+  const { cart, dispatch } = useCart();
 
   // Components
   const CartRows = cart.map((itemId, index) => (
@@ -34,7 +34,7 @@ export default function Cart({ currencyConverter, inventory, localCurrency }) {
           <tbody>{CartRows}</tbody>
         </table>
       )}
-      <button onClick={emptyCart}>Empty cart</button>
+      <button onClick={() => dispatch({ type: "empty" })}>Empty cart</button>
     </div>
   );
 }

@@ -7,7 +7,7 @@ export default function InventoryTable({
   localCurrency,
 }) {
   // Global state
-  const { addToCart } = useCart();
+  const { dispatch } = useCart();
 
   // Components
   const InventoryRows = inventory.map((item) => (
@@ -21,7 +21,9 @@ export default function InventoryTable({
         {currencyConverter.convert(item.price, item.currency, localCurrency)}
       </td>
       <td>
-        <button onClick={() => addToCart(item.id)}>Add to Cart</button>
+        <button onClick={() => dispatch({ type: "add", itemId: item.id })}>
+          Add to Cart
+        </button>
       </td>
     </tr>
   ));
