@@ -57,7 +57,7 @@ test("should have a working add to cart button", () => {
   // Arrange
   render(
     <CartProvider>
-      <Inventory
+      <InventoryTable
         currencyConverter={currencyConverter}
         inventory={inventory}
         localCurrency={localCurrency}
